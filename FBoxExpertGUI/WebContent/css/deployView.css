@@ -1,0 +1,54 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height:100%;
+	// background-color: #E6FFFF;
+	background-color: #EEEEEE;
+	
+}
+
+#deploy-main-wrapper {
+	// background-color: #EEEEEE; /* Grey */
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#deploy-header-wrapper {
+	//background-color: #FFFF00; /* Yellow */
+	width: 100%;
+	height: 45px;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+#deploy-header-title h2 {
+	// text-align: left;
+	text-align: center;
+	margin: 6px auto;
+	//vertical-align: middle;
+}
+
+#deploy-content-wrapper {
+	// background-color: #FFA500; /* Orange */
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	// height: 80%;
+	clear:both;
+}
+
+
+#deployment-content {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height:100%;
+} 
+
+#deployment-dialog {
+	text-align: center;
+}

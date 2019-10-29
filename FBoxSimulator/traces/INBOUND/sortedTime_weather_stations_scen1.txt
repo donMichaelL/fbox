@@ -1,0 +1,18 @@
+#METADATA SECTION
+#Type = Observation
+#Mobile = false
+#Owner = NKUA
+#Phenomenon = [humidity,precipitation,winddirection,temperature,pressure,windspeed]
+#Phenomenon_Unit = [percentage,weard,degrees,celcius,hPa,m/s]
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#WEATHER-STATION-NKUA-1 47.83305 -16.58645 true
+
+#unique_id timestamp longitude latitude humidity precipitation winddirection temperature pressure windspeed
+WEATHER-STATION-NKUA-1 4000 47.83305 -16.58645 100 2.2 225.0 14.7 1013.6 1.6
+WEATHER-STATION-NKUA-1 24000 47.83305 -16.58645 100 2.4 225.0 14.7 1013.4 3.2
+WEATHER-STATION-NKUA-1 44000 47.83305 -16.58645 100 2.8 225.0 14.6 1013.2 1.6
+WEATHER-STATION-NKUA-1 64000 47.83305 -16.58645 100 2.8 225.0 14.4 1013.2 3.2
+WEATHER-STATION-NKUA-1 84000 47.83305 -16.58645 100 3.0 225.0 14.3 1013.4 1.6
+WEATHER-STATION-NKUA-1 104000 47.83305 -16.58645 100 3.2 225.0 14.3 1013.4 1.6

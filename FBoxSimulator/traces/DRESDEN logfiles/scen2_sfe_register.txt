@@ -1,0 +1,12 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false 
+#Owner = NKUA
+#Phenomenon = peopleInDanger
+#Phenomenon_Unit = %
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#SensorFusionEngine-2 13.95307 50.95860 true
+
+#unique_id timestamp longitude latitude peopleInDanger

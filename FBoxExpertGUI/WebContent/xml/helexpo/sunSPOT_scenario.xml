@@ -1,0 +1,51 @@
+<fusion-application id="Light_Scenario" description="MOBICS">
+	<output>
+		<out id="Out1">
+			<formatter type="expoForm">
+				<!--<iparam name="application-id">1</iparam> -->
+				<!-- polygon in (long1,lat1 long2,lat2 .... longN,latN long1,lat1) format -->
+				<!--<iparam name="location">23.786623,37.963683 23.790915,37.958878 23.786623,37.963683</iparam> -->
+			</formatter>
+			
+            <adapter type="mqAdapter">
+                <iparam name="mqurl">tcp://light.di.uoa.gr:61616</iparam>
+				<iparam name="mqid">MOBICS_TEST</iparam>
+				<iparam name="topic">false</iparam>
+				<iparam name="transacted">false</iparam>
+            </adapter>
+			
+            <sources>
+                <src id="SV"/>
+            </sources>
+        </out>
+	</output>
+	
+	<streamers>
+		<!-- Light Sensors near EXPO's Area -->
+		<streamSelector id="sunSPOTS">
+            <select type="spatial">POLYGON ((23.76219 37.98921, 23.76453 37.98921, 23.76453 37.98806, 23.76219 37.98806, 23.76219 37.98921))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:light</select>
+        </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<contextor id="Thresholder"> <!-- This will build 3 thresholders --> 
+            <algorithm name="Threshold">
+				<iparam name="computation-type">hard</iparam>
+                <iparam name="operator">lt</iparam>
+                <iparam name="value">15</iparam>
+            </algorithm>
+            <sources>
+                <src selector="sunSPOTS"/>                                
+            </sources>                                                  
+        </contextor>
+		<contextor id="SV"> <!-- This will vothe fromthe available thresholders -->
+            <algorithm name="SimpleVoting">
+                <iparam name="z-threshold">0.5</iparam>
+            </algorithm>        
+            <sources>
+                <src id="Thresholder"/>
+            </sources>                        
+        </contextor>
+	</contextors>
+</fusion-application>

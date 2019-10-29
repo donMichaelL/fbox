@@ -1,0 +1,76 @@
+<fusion-application id="CUSUM_TEST" description="NoveltyDetection">
+	
+	<!-- Output Section -->
+	<output>
+		<out id="Out1"> <!-- Define an output container for the fusion result -->
+            <formatter type="cap"> <!-- Define the formatter of the container (here a CAP message is being created) -->
+                <iparam name="sender">SFE</iparam> <!-- Required parameters of this formatter -->
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Suburban area in danger due to fire event</iparam>
+                <iparam name="description">Fire event in a suburban area outside Vienna</iparam>
+                <iparam name="areaDesc">Suburban area outside Vienna</iparam>
+                <iparam name="location">16.13406 48.28323, 16.10041 48.25672, 16.28581 48.25901, 16.34143 48.27455, 16.33387 48.28323, 16.27688 48.28003, 16.25285 48.30242, 16.21646 48.29191, 16.18418 48.30836, 16.13406 48.28323</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1</iparam>
+				<iparam name="category">Met</iparam>
+            </formatter>
+			
+            <adapter type="capHttp"> <!-- Define the adapter for the formatted output -->
+                <iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>
+			
+            <sources> <!-- Specify the input of container's formatter (CAP formatter is SISO) -->
+                <src id="CertaintyMapper"/> <!-- The input stream is the Mapped Value of Average algorithm in the "contextors" section -->
+            </sources>
+        </out>
+	</output>
+	
+	<!-- Streamers Section -->
+	<streamers>
+		<streamSelector id="humidity"> <!-- Select sensor streams that take measures of humidity in the area defined from the polygon --> 
+            <select type="spatial">POLYGON ((16.13406 48.28323, 16.10041 48.25672, 16.28581 48.25901, 16.34143 48.27455, 16.33387 48.28323, 16.27688 48.28003, 16.25285 48.30242, 16.21646 48.29191, 16.18418 48.30836, 16.13406 48.28323))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:humidity</select>
+        </streamSelector>
+	</streamers>
+	
+	<!-- Contextors Section -->
+	<contextors> <!-- Define the algorithms that are going to be used -->
+		<contextor id="cumsum"> <!-- Contextor which encapsulates CUMSUM algorithm -->
+            <algorithm name="CUMSUM"> <!-- Selected CUMSUM algorithm to detect changes to sensor's distribution --> 
+                <iparam name="target-value">75</iparam> <!-- Values for the parameters of CUMSUM algorithm -->
+                <iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">15</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">5</iparam>
+				<iparam name="detection-type">below</iparam>
+            </algorithm>
+            <sources> <!-- Define the input source for CUMSUM algorithm (SISO) -->
+                <src selector="humidity"/>   <!-- The input stream is each sensor stream from the result of the spatial query in "streamers" section -->                            
+            </sources>                                           
+        </contextor>
+		
+		<contextor id="AvHum"> <!-- Contextor which encapsulates Average algorithm -->
+            <algorithm name="Average"> <!-- Selected Average algorithm to detect how many sensors changed their distribution accordint to the CUMSUM algorithm --> 
+				<iparam name="type">soft</iparam> <!-- Values for the parameters of CUMSUM algorithm -->
+			</algorithm>
+            <sources>
+                <src selector="cumsum"/> <!-- The input streams are the CUMSUMs' outputs for every sensor stream detected from the spatial query in "streamers" section -->  				
+            </sources>                                                  
+        </contextor>
+		
+		<contextor id="CertaintyMapper"> <!-- Contextor which encapsulates a ValueMapper algorithm -->
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam> <!-- Parameters of the algorithm -->
+				<iparam name="interval-configuration">0.0;0.1;0.5;1.0</iparam>
+				<iparam name="mapping-values">Unlikely;Possible;Likely</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvHum"/> <!-- Input of this algorithm is the output of Average algorithm's contextor -->   				
+            </sources>                                                  
+        </contextor>
+	</contextors>
+	
+</fusion-application>

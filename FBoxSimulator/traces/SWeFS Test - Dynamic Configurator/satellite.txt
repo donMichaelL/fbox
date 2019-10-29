@@ -1,0 +1,19 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false
+#Owner = NKUA
+#Phenomenon = fireProbability
+#Phenomenon_Unit = probability
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#sat_sensor_2014 23.74903 38.16629 true
+
+#unique_id timestamp longitude latitude probability
+sat_sensor_2014 100 23.74903 38.16629 0.3
+sat_sensor_2014 20100 23.74903 38.16629 0.6
+sat_sensor_2014 40100 23.74903 38.16629 0.5
+sat_sensor_2014 60100 23.74903 38.16629 0.6
+sat_sensor_2014 80100 23.74903 38.16629 0.7
+sat_sensor_2014 100100 23.74903 38.16629 0.8
+sat_sensor_2014 120100 23.74903 38.16629 0.9

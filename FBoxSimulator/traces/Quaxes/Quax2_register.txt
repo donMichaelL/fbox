@@ -1,0 +1,12 @@
+#METADATA SECTION
+#Type = Observation
+#Mobile = false
+#Owner = Mobics
+#Phenomenon = [BatteryVoltage,CO]
+#Phenomenon_Unit = [V,ppm]
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#0013A2004086D172 23.78418 37.96305 true
+
+#unique_id timestamp longitude latitude fire_alarm_status CO2_measurement estimated_building_damage people_counter

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<link rel="icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<title>Sensor Fusion Engine Expert GUI - Login</title>
+
+		 <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/widgets.css"/>
+		<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+		
+		<!-- ~~~~~~~~~~ script(s) ~~~~~~~~~~ -->		
+    	<!-- libraries -->
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+        
+        <!-- application script(s) -->
+        <script type="text/javascript">
+    		$(document).ready(function() {
+    			fnLoginFailedInitComponents();
+    			fnLoginFailedEnableEventListeners();
+        	}); 
+
+        	function fnLoginFailedInitComponents () {
+        		$("input[type=submit], button").button();
+    			// $("#content-wrapper").load("simpleLogin.html");
+          	 }
+
+        	function fnLoginFailedEnableEventListeners() {
+        		$("#try-again-button").click(function() {
+        			window.location = "index.html";
+        		});
+        	}
+
+		</script>
+	</head>
+<body>
+	<div id="main-wrapper">
+		
+		<div id="header-wrapper">
+			<div id="header-logo">
+				<img alt="logo" src="images/logos/SWeFS_logo.png">
+			</div>
+			
+			<div id="header-title">
+				<h2>Fusion Module - Expert GUI</h2>
+			</div>
+			
+			<div id="header-toolbar">
+			</div>
+		</div>
+		
+		<div id="content-wrapper">
+			<div id="basic-main-wrapper">
+				 
+				<div id="basic-content-wrapper">
+				<h2> Sorry, login failed! </h2>
+				
+				<!-- <br/><br/> <a href="/FBoxExpertGUI">Click here to go to try again</a>  -->
+				<button id="try-again-button" class="small-buttons-white">Try Again</button>
+				</div>
+			</div>		
+		</div>
+		
+		<!-- 
+		<div id="footer">
+			<p><strong>Pervasive Computing Research Group</strong></p>
+		</div>  -->  
+	</div>
+	
+	
+	 
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Sensor Integration - Applications</title>
+
+		 <!-- ~~~~~~~~~~~ CSS ~~~~~~~~~~ -->
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/> 
+   
+   		<style type="text/css">
+   		
+   		.ui-button{
+    		font-size: 15px;
+		}
+		
+		.ui-button-text-only .ui-button-text {
+    		padding: .1em .6em .2em;
+		}
+		
+		.ui-dialog .ui-dialog-buttonpane { 
+    		text-align: center;
+		}
+		
+		.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
+    		float: none;
+		}
+		
+		</style>
+		
+   		<!-- ~~~~~~~~~~ Javascript ~~~~~~~~~~ -->
+		<!-- jQuery UI -->
+		<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+    	
+    	
+    	<script type="text/javascript">
+    		$(document).ready(function() {
+    			$("#radio-buttons").buttonset();
+    			$(":input").attr('checked', 'checked');
+        	}); 
+
+    
+			
+
+			
+		</script>
+
+	</head>
+<body>
+	
+	<form>			
+		<div id="radio-buttons">
+			<input type="radio" id="radio1" name="radio"/><label for="radio1">Map View</label>
+			<input type="radio" id="radio2" name="radio"/><label for="radio2">Log View</label>
+		</div>
+	</form>
+				
+</body>
+</html>

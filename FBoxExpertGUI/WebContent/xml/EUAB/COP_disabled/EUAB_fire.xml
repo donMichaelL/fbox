@@ -1,0 +1,346 @@
+<fusion-application id="EUAB_FIRE" description="EUAB_Fire_Scenario">
+	<output>
+		<out id="Out1"> <!-- CAP message (Area 1) -->
+            <formatter type="cap">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Suburban area in danger due to fire event</iparam>
+                <iparam name="description">Fire event in a suburban area outside Vienna</iparam>
+                <iparam name="areaDesc">Suburban area outside Vienna</iparam>
+                <iparam name="location">48.28323,16.13406 48.25672,16.10041 48.21190,16.21028 48.22791,16.24392 48.21831,16.27276 48.23981,16.28169 48.25901,16.28581 48.27455,16.34143 48.28323,16.33387 48.28003,16.27688 48.30242,16.25285 48.29191,16.21646 48.30836,16.18418 48.28323,16.13406</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1a</iparam>
+				<iparam name="category">Fire</iparam>
+            </formatter>
+			<!--
+            <adapter type="capHttp">
+                <iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>
+			-->
+            <sources>
+                <src id="CertaintyMapper1"/>
+            </sources>
+        </out>
+		<out id="Out2"> <!-- CAP message (Area 2) -->
+            <formatter type="cap">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Suburban area in danger due to fire event</iparam>
+                <iparam name="description">Fire event in a suburban area outside Vienna</iparam>
+                <iparam name="areaDesc">Suburban area outside Vienna</iparam>
+                <iparam name="location">48.21899,16.1532 48.18833,16.11415 48.16269,16.17938 48.13978,16.24323 48.19291,16.25147 48.20801,16.17182 48.21899,16.1532</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1b</iparam>
+				<iparam name="category">Fire</iparam>
+            </formatter>
+			<!--
+            <adapter type="capHttp">
+                <iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>
+			-->
+            <sources>
+                <src id="CertaintyMapper2"/>
+            </sources>
+        </out>
+		<out id="Out3"> <!-- Email notification (Area 1) -->
+            <formatter type="emailMISO">
+				<iparam name="area-location">1</iparam>
+				<iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Suburban area in danger due to fire event</iparam>
+                <iparam name="description">Fire event in a suburban area outside Vienna</iparam>
+                <iparam name="areaDesc">Suburban area outside Vienna</iparam>
+                <iparam name="location">48.28323,16.13406 48.25672,16.10041 48.21190,16.21028 48.22791,16.24392 48.21831,16.27276 48.23981,16.28169 48.25901,16.28581 48.27455,16.34143 48.28323,16.33387 48.28003,16.27688 48.30242,16.25285 48.29191,16.21646 48.30836,16.18418 48.28323,16.13406</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1a</iparam>
+				<iparam name="category">Fire</iparam>
+            </formatter>
+			
+            <adapter type="emailJBoss">
+				<iparam name="from">IDIRA</iparam>
+				<iparam name="to">vpap@di.uoa.gr</iparam>
+				<iparam name="subject">[IDIRA] Fire Incident in Vienna</iparam>
+            </adapter>             
+			
+			<sources>
+				<src id="EmailCertaintyMapper1"/>
+                <src id="LOP1"/>
+            </sources>
+        </out>
+		<out id="Out4"> <!-- Email notification (Area 2) -->
+            <formatter type="emailMISO">
+				<iparam name="area-location">2</iparam>
+				<iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Suburban area in danger due to fire event</iparam>
+                <iparam name="description">Fire event in a suburban area outside Vienna</iparam>
+                <iparam name="areaDesc">Suburban area outside Vienna</iparam>
+                <iparam name="location">48.21899,16.1532 48.18833,16.11415 48.16269,16.17938 48.13978,16.24323 48.19291,16.25147 48.20801,16.17182 48.21899,16.1532</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1b</iparam>
+				<iparam name="category">Fire</iparam>
+            </formatter>
+			
+            <adapter type="emailJBoss">
+				<iparam name="from">IDIRA</iparam>
+				<iparam name="to">vpap@di.uoa.gr</iparam>
+				<iparam name="subject">[IDIRA] Fire Incident in Vienna</iparam>
+            </adapter>             
+			
+			<sources>
+				<src id="EmailCertaintyMapper2"/>
+                <src id="LOP2"/>
+            </sources>
+        </out>
+	</output>
+	
+	<streamers>
+		<!-- Humidity Sensors for Area 1 -->
+		<streamSelector id="humidity1">
+            <select type="spatial">POLYGON ((16.13406 48.28323, 16.10041 48.25672, 16.21028 48.21190, 16.24392 48.22791, 16.27276 48.21831, 16.28169 48.23981, 16.28581 48.25901, 16.34143 48.27455, 16.33387 48.28323, 16.27688 48.28003, 16.25285 48.30242, 16.21646 48.29191, 16.18418 48.30836, 16.13406 48.28323))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:humidity</select>
+        </streamSelector>
+		
+		<!-- Humidity Sensors for Area 2 -->
+		<streamSelector id="humidity2">
+            <select type="spatial">POLYGON ((16.1532 48.21899, 16.11415 48.18833, 16.17938 48.16269, 16.24323 48.13978, 16.25147 48.19291, 16.17182 48.20801, 16.1532 48.21899))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:humidity</select>
+        </streamSelector>
+		
+		<!-- Temperature Sensors for Area 1 -->
+		<streamSelector id="temperature1">
+            <select type="spatial">POLYGON ((16.13406 48.28323, 16.10041 48.25672, 16.21028 48.21190, 16.24392 48.22791, 16.27276 48.21831, 16.28169 48.23981, 16.28581 48.25901, 16.34143 48.27455, 16.33387 48.28323, 16.27688 48.28003, 16.25285 48.30242, 16.21646 48.29191, 16.18418 48.30836, 16.13406 48.28323))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</select>
+        </streamSelector>
+		
+		<!-- Temperature Sensors for Area 2 -->
+		<streamSelector id="temperature2">
+            <select type="spatial">POLYGON ((16.1532 48.21899, 16.11415 48.18833, 16.17938 48.16269, 16.24323 48.13978, 16.25147 48.19291, 16.17182 48.20801, 16.1532 48.21899))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</select>
+        </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<!-- CUMSUM for Humidity Sensor Streams (Area 1) -->
+		<contextor id="cumsumHum1">
+            <algorithm name="CUMSUM">
+				<iparam name="target-value">75</iparam>
+                <iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">15</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">5</iparam>
+				<iparam name="detection-type">below</iparam>
+            </algorithm>
+            <sources>
+                <src selector="humidity1"/>                                
+            </sources>
+        </contextor>
+		
+		<!-- CUMSUM for Humidity Sensor Streams (Area 2) -->
+		<contextor id="cumsumHum2">
+            <algorithm name="CUMSUM">
+				<iparam name="target-value">75</iparam>
+                <iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">15</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">5</iparam>
+				<iparam name="detection-type">below</iparam>
+            </algorithm>
+            <sources>
+                <src selector="humidity2"/>                                
+            </sources>
+        </contextor>
+		
+		<!-- CUMSUM for Temperature Sensor Streams (Area 1) -->
+		<contextor id="cumsumTemp1">
+            <algorithm name="CUMSUM">
+				<iparam name="target-value">0</iparam>
+				<iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">10</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">3</iparam>
+				<iparam name="detection-type">above</iparam>
+            </algorithm>
+            <sources>
+                <src selector="temperature1"/>                                
+            </sources>
+        </contextor>
+		
+		<!-- CUMSUM for Temperature Sensor Streams (Area 2) -->
+		<contextor id="cumsumTemp2">
+            <algorithm name="CUMSUM">
+				<iparam name="target-value">0</iparam>
+				<iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">10</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">3</iparam>
+				<iparam name="detection-type">above</iparam>
+            </algorithm>
+            <sources>
+                <src selector="temperature2"/>                                
+            </sources>
+        </contextor>
+		
+		<!-- Average for Humidity Sensor Streams (Area 1) -->
+		<contextor id="AvHum1">
+            <algorithm name="Average">
+				<iparam name="type">soft</iparam>
+			</algorithm>
+            <sources>
+                <src selector="cumsumHum1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Average for Humidity Sensor Streams (Area 2) -->
+		<contextor id="AvHum2">
+            <algorithm name="Average">
+				<iparam name="type">soft</iparam>
+			</algorithm>
+            <sources>
+                <src selector="cumsumHum2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Average for Temperature Sensor Streams (Area 1) -->
+		<contextor id="AvTemp1">
+            <algorithm name="Average">
+				<iparam name="type">soft</iparam>
+			</algorithm>
+            <sources>
+                <src selector="cumsumTemp1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Average for Temperature Sensor Streams (Area 2) -->
+		<contextor id="AvTemp2">
+            <algorithm name="Average">
+				<iparam name="type">soft</iparam>
+			</algorithm>
+            <sources>
+                <src selector="cumsumTemp2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Buffered Mean for Humidity Average (Area 1) -->
+		<contextor id="MeanHum1">
+            <algorithm name="Mean">
+				<iparam name="buffer">10</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvHum1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Buffered Mean for Humidity Average (Area 2) -->
+		<contextor id="MeanHum2">
+            <algorithm name="Mean">
+				<iparam name="buffer">10</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvHum2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Buffered Mean for Temperature Average (Area 1) -->
+		<contextor id="MeanTemp1">
+            <algorithm name="Mean">
+				<iparam name="buffer">10</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvTemp1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Buffered Mean for Temperature Average (Area 2) -->
+		<contextor id="MeanTemp2">
+            <algorithm name="Mean">
+				<iparam name="buffer">10</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvTemp2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Linear Opinion Pool for the combination of Humidity and Temperature change detection (Area 1) -->
+		<contextor id="LOP1">
+            <algorithm name="LinearOpinionPool">
+				<iparam name="weight-list">0.6;0.4</iparam>
+			</algorithm>
+            <sources>
+                <src selector="MeanHum1"/>  
+				<src selector="MeanTemp1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Linear Opinion Pool for the combination of Humidity and Temperature change detection (Area 2) -->
+		<contextor id="LOP2">
+            <algorithm name="LinearOpinionPool">
+				<iparam name="weight-list">0.6;0.4</iparam>
+			</algorithm>
+            <sources>
+                <src selector="MeanHum2"/>  
+				<src selector="MeanTemp2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Certainty Mapper (Area 1) -->
+		<contextor id="CertaintyMapper1">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.1;0.5;1.0</iparam>
+				<iparam name="mapping-values">Unlikely;Possible;Likely</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="LOP1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Certainty Mapper (Area 2) -->
+		<contextor id="CertaintyMapper2">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.1;0.5;1.0</iparam>
+				<iparam name="mapping-values">Unlikely;Possible;Likely</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="LOP2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Email Certainty Mapper (Area 1) -->
+		<contextor id="EmailCertaintyMapper1">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.5;1.0</iparam> <!-- Produce email when incident's certainty is "likely" -->
+				<iparam name="mapping-values">true</iparam>
+				<iparam name="default">false</iparam>
+			</algorithm>
+            <sources>
+                <src selector="LOP1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Email Certainty Mapper (Area 2) -->
+		<contextor id="EmailCertaintyMapper2">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.5;1.0</iparam> <!-- Produce email when incident's certainty is "likely" -->
+				<iparam name="mapping-values">true</iparam>
+				<iparam name="default">false</iparam>
+			</algorithm>
+            <sources>
+                <src selector="LOP2"/>    				
+            </sources>                                                  
+        </contextor>
+	</contextors>
+</fusion-application>

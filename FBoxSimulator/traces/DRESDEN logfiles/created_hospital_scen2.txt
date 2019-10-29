@@ -1,0 +1,62 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false 
+#Owner = FLEXIT
+#Phenomenon = personCount
+#Phenomenon_Unit = person
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#flexit-demonstrator-1 13.95307 50.95860 true
+
+#unique_id timestamp longitude latitude personCount
+flexit-demonstrator-1 3150 13.95307 50.95860 448
+flexit-demonstrator-1 13150 13.95307 50.95860 503
+flexit-demonstrator-1 23150 13.95307 50.95860 547
+flexit-demonstrator-1 33150 13.95307 50.95860 657
+flexit-demonstrator-1 43150 13.95307 50.95860 667
+flexit-demonstrator-1 53150 13.95307 50.95860 751
+flexit-demonstrator-1 63150 13.95307 50.95860 738
+flexit-demonstrator-1 73150 13.95307 50.95860 722
+flexit-demonstrator-1 83150 13.95307 50.95860 797
+flexit-demonstrator-1 93150 13.95307 50.95860 816
+flexit-demonstrator-1 103150 13.95307 50.95860 819
+flexit-demonstrator-1 113150 13.95307 50.95860 790
+flexit-demonstrator-1 123150 13.95307 50.95860 913
+flexit-demonstrator-1 133150 13.95307 50.95860 828
+flexit-demonstrator-1 143150 13.95307 50.95860 837
+flexit-demonstrator-1 153150 13.95307 50.95860 861
+flexit-demonstrator-1 163150 13.95307 50.95860 1016
+flexit-demonstrator-1 173150 13.95307 50.95860 1077
+flexit-demonstrator-1 183150 13.95307 50.95860 1163
+flexit-demonstrator-1 193150 13.95307 50.95860 1139
+flexit-demonstrator-1 203150 13.95307 50.95860 1172
+flexit-demonstrator-1 213150 13.95307 50.95860 1193
+flexit-demonstrator-1 223150 13.95307 50.95860 1165
+flexit-demonstrator-1 233150 13.95307 50.95860 1143
+flexit-demonstrator-1 243150 13.95307 50.95860 1115
+flexit-demonstrator-1 253150 13.95307 50.95860 1004
+flexit-demonstrator-1 263150 13.95307 50.95860 1014
+flexit-demonstrator-1 273150 13.95307 50.95860 958
+flexit-demonstrator-1 283150 13.95307 50.95860 1018
+flexit-demonstrator-1 293150 13.95307 50.95860 1053
+flexit-demonstrator-1 303150 13.95307 50.95860 1089
+flexit-demonstrator-1 313150 13.95307 50.95860 1146
+flexit-demonstrator-1 323150 13.95307 50.95860 1073
+flexit-demonstrator-1 333150 13.95307 50.95860 1082
+flexit-demonstrator-1 343150 13.95307 50.95860 1029
+flexit-demonstrator-1 353150 13.95307 50.95860 1073
+flexit-demonstrator-1 363150 13.95307 50.95860 1115
+flexit-demonstrator-1 373150 13.95307 50.95860 1065
+flexit-demonstrator-1 383150 13.95307 50.95860 1198
+flexit-demonstrator-1 393150 13.95307 50.95860 1098
+flexit-demonstrator-1 403150 13.95307 50.95860 1170
+flexit-demonstrator-1 413150 13.95307 50.95860 1193
+flexit-demonstrator-1 423150 13.95307 50.95860 1206
+flexit-demonstrator-1 433150 13.95307 50.95860 1328
+flexit-demonstrator-1 443150 13.95307 50.95860 1250
+flexit-demonstrator-1 453150 13.95307 50.95860 1334
+flexit-demonstrator-1 463150 13.95307 50.95860 1335
+flexit-demonstrator-1 473150 13.95307 50.95860 1297
+flexit-demonstrator-1 483150 13.95307 50.95860 1272
+flexit-demonstrator-1 493150 13.95307 50.95860 1296

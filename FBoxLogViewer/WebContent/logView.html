@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Sensor Integration - Log View</title>
+		
+	    <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+	    <!-- DataTables -->
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_page.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_table.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_table_jui.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/jquery.dataTables.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/jquery.dataTables_themeroller.css"/>
+	    <!-- Table Tools -->
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/extras/TableTools/media/css/TableTools.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/extras/TableTools/media/css/TableTools_JUI.css"/>
+	    <!-- JQuery UI-->
+	    <link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+	   	<!-- application styles -->
+	    <link rel="stylesheet" type="text/css" href="css/logView.css"/>
+	  	<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+	  
+	    <!-- ~~~~~~~~~~ javascript ~~~~~~~~~~ -->
+	   	<!-- DataTables -->
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.dataTables.min.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.dataTables.js"></script>
+	    <!-- Table Tools -->
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/extras/TableTools/media/js/TableTools.min.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/extras/TableTools/media/js/ZeroClipboard.js"></script>
+	    <!-- jQuery UI -->
+	    <script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+	    <!-- application js -->
+	    <script type="text/javascript" src="js/logView.js"></script>
+	    
+	    <script type="text/javascript">
+			$(document).ready(function() {
+				fnLogViewInitComponents();
+				fnLogViewRefreshValuesTable();
+			});				 		
+		</script>
+		<!-- ~~~~~~~~~~~ end javascript ~~~~~~~~~~ -->
+	</head>
+	
+	<body>	
+	    <div id="sensors-values-wrapper">
+	    	<div id="sensors-values-header">
+	    		<h2>Input Streams (Last Values) Demo</h2>
+	    	</div>
+	    	
+	    	<div id="sensors-values-table-wrapper">
+	        	<table id="sensors-values-table" class="display">
+	            	 <thead>	
+	                	 <tr>
+	                 		<th>Timestamp</th>
+	                     	<th>SensorID</th>
+							<th>Phenomenon</th>
+	                    	 <th>LastValue</th>
+	                 	</tr>
+	             	</thead>
+	             	<tbody>
+	             	</tbody>
+	         	</table>
+	        </div>
+	      </div>
+	</body>
+</html>

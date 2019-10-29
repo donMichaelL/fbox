@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Sensor Fusion Engine - Application Registry View</title>
+		
+	    <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+	    <!-- DataTables -->
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_page.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_table.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_table_jui.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/jquery.dataTables.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/jquery.dataTables_themeroller.css"/>
+	    <!-- Table Tools -->
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/extras/TableTools/media/css/TableTools.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/extras/TableTools/media/css/TableTools_JUI.css"/>
+	    <!-- JQuery UI-->
+	    <link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+	   	<!-- application styles -->
+	    <link rel="stylesheet" type="text/css" href="css/appRegistryView.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/widgets.css"/>
+	  	<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+	  
+	    <!-- ~~~~~~~~~~ javascript ~~~~~~~~~~ -->
+	   	<!-- DataTables -->
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.dataTables.min.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.dataTables.js"></script>
+	    <!-- Table Tools -->
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/extras/TableTools/media/js/TableTools.min.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/extras/TableTools/media/js/ZeroClipboard.js"></script>
+	    <!-- jQuery UI -->
+	    <script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+	    
+	    <!-- application js -->
+	    <script type="text/javascript" src="js/dt-utils.js"></script>
+	    <script type="text/javascript" src="js/appRegistryView.js"></script> 
+	    
+	    <script type="text/javascript">
+			$(document).ready(function() {
+				fnAppRegistryViewInitComponents();
+				fnAppRegistryViewEnableEventListeners();	
+				fnAppRegistryViewRefreshDeployemntsTable();
+			});				 		
+		</script>
+		<!-- ~~~~~~~~~~~ end javascript ~~~~~~~~~~ -->
+	</head>
+	
+	<body>	
+	    <div id="deploy-registry-main-wrapper">
+	    	<div id="deploy-registry-header">
+	    		<h2>Deployments</h2>
+	    	</div>
+	    	
+	    	<div id="deploy-registry-table-wrapper">
+	        	<table id="deploy-registry-table" class="display">
+	            	 <thead>	
+	                	 <tr>
+	                	 	<th>Timestamp</th>
+	                     	<th>Runtime Name</th>
+	                     	<th>Status</th>
+	                    	<th>More</th>
+	                 	</tr>
+	             	</thead>
+	             	<tbody>
+	             	</tbody>
+	         	</table>
+	        </div>
+	        
+	        <div id="deploy-registry-controls-wrapper">
+	        	
+	        	<div id="deploy-registry-controls-left">
+	        		<br />
+	        	</div>
+		        
+		        <div id="deploy-registry-controls-middle">
+		       		 <br />
+		        	<button type="button" id="undeploy-button" class="small-buttons-white">Undeploy</button>
+		         	<!-- <button type="button" id="iterate-button" class="small-buttons-white">Iterate</button>  -->
+		        </div>
+		        
+		        <!-- 
+		        <div id="deploy-registry-controls-right">
+	        	</div>  -->
+	        </div>
+	        
+	        
+	        <div id="undeployment-dialog" title="Undeployment Status">
+				<div id="undeployment-loading-spinner" class="undeployment-loading-spinner" style="display:none;">
+		  			<p>
+		  				<img src="images/ajax-loader.gif" alt="Loading"/>
+		  			</p>
+				</div>
+				
+				<div id="undeployment-dialog-feedback">
+				</div>
+			</div>
+	      </div>
+	</body>
+</html>

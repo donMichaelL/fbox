@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<link rel="icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<title>Sensor Fusion Engine Expert GUI - Visualize Sensor Data</title>
+
+		 <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="libs/combo/css/custom-combo.css"/>
+	   	<!-- application styles -->
+	    <link rel="stylesheet" type="text/css" href="css/chartView.css"/>
+		 <!-- 
+		<link rel="stylesheet" href="libs/chosen/docsupport/style.css">
+  		<link rel="stylesheet" href="libs/chosen/docsupport/prism.css">
+		<link rel="stylesheet" type="text/css" href="libs/chosen/chosen.min.css"/>
+	 -->
+		 
+		<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+		
+   		<!-- ~~~~~~~~~~ script(s) ~~~~~~~~~~ -->		
+    	<!-- libraries -->
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+        <!-- 
+        <script src="libs/hc/highcharts.js"></script>
+		<script src="libs/hc/modules/exporting.js"></script>  
+		<script src="libs/combo/custom-combo.js"></script>
+		 -->
+		 
+		 <!-- 
+		<script src="libs/chosen/docsupport/prism.js"></script>
+		<script src="libs/chosen/chosen.jquery.min.js"></script>
+		<script src="libs/chosen/chosen.proto.min.js"></script>
+		
+		 -->
+		
+		<script src="libs/hs/highstock.js"></script>
+		<script src="libs/hs/modules/exporting.js"></script>
+       	<!-- 
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+ 		-->
+ 		
+        <!-- application script(s) -->
+        <script src="js/chartView.js"></script>  
+        
+        <script type="text/javascript">
+    		$(document).ready(function() {
+    			fnInitComponents();    			
+        	}); 
+ 		</script>
+	</head>
+	
+	<body>
+		<div id="main-wrapper">
+			<div id="header-wrapper">
+				<div id="sensors-values-header">
+					<h2>Sensor Fusion Engine - Visualize Sensor Data</h2>
+				</div>	
+			</div>
+			
+			<div id="content-wrapper">
+				<div id="control-wrapper">				
+					<input type="submit" id="plot-button" value="Plot" />
+					<input type="submit" id="clear-button" value="Clear" />
+					<br/><br/>
+					
+					<label for="procedures">Procedures:</label>
+					<select id="procedures-combo" name="procedures-combo">
+						<option value="Choose procedure...">Choose procedure...</option>
+					</select>
+					
+					<label for="phenomena">Phenomena:</label>
+					<select id="phenomena-combo">
+						<!-- <option value="Choose phenomenon...">Choose phenomenon...</option> -->
+					</select>
+				</div>
+				
+				<div id="chart-div">		
+				</div>
+				
+	
+				<div id="load-data-dialog" title="Loading Status">
+					<div id="load-data-dialog-feedback">
+					</div>
+				</div>
+				
+				<!-- 
+				<div id="rawdata-textarea-div">
+					<textarea id="rawdata-textarea" rows="10" cols="60" name="rawdata-textarea"></textarea>
+			
+				</div>  --> 
+			</div>
+		</div>	
+	</body>
+</html>

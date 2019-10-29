@@ -1,0 +1,178 @@
+<fusion-application id="Parnitha_Fire_Detection" description="Detect fire incidents at Parnitha">
+	<output>
+		<out id="Out1"> <!-- Email notification -->
+            <formatter type="emailMISO">
+				<iparam name="area-location">1</iparam>
+				<iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Fire at Parnitha mountain</iparam>
+                <iparam name="description">The east side of Parnitha mountain is in danger due to a fire event</iparam>
+                <iparam name="areaDesc">Suburban area outside Athens</iparam>
+                <iparam name="location">38.15828,23.78298 38.11142,23.80770 38.12574,23.82109 38.14626,23.82315 38.15085,23.83963 38.17191,23.81800 38.15828,23.78298</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1a</iparam>
+				<iparam name="category">Fire</iparam>
+            </formatter>
+			
+            <adapter type="emailJBoss">
+				<iparam name="from">IDIRA</iparam>
+				<iparam name="to">gbismpikis@di.uoa.gr</iparam>
+				<iparam name="subject">[IDIRA] Fire Incident at the East Side of Parnitha Mountain</iparam>
+            </adapter>             
+			
+			<sources>
+				<src id="EmailCertaintyMapper1"/>
+                <src id="LOP1"/>
+            </sources>
+        </out>
+		
+		<out id="Out2"> <!-- CAP message -->
+            <formatter type="cap">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Fire at Parnitha mountain</iparam>
+                <iparam name="description">The east side of Parnitha mountain is in danger due to a fire event</iparam>
+                <iparam name="areaDesc">Suburban area outside Athens</iparam>
+                <iparam name="location">38.15828,23.78298 38.11142,23.80770 38.12574,23.82109 38.14626,23.82315 38.15085,23.83963 38.17191,23.81800 38.15828,23.78298</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1a</iparam>
+				<iparam name="category">Fire</iparam>
+            </formatter>
+			
+            <adapter type="capHttp">
+                <iparam name="wsdl">http://lnx1de.iessolutions.eu:3030/axis2/services/Inbound_EDXL_WebService?wsdl</iparam>
+            </adapter>
+			
+            <sources>
+                <src id="CertaintyMapper1"/>
+            </sources>
+        </out>
+	</output>
+	
+	<streamers>
+		<!-- Humidity Sensors -->
+		<streamSelector id="humidity1">
+            <select type="spatial">POLYGON ((23.78298 38.15828, 23.80770 38.11142, 23.82109 38.12574, 23.82315 38.14626, 23.83963 38.15085, 23.81800 38.17191, 23.78298 38.15828))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:humidity</select>
+        </streamSelector>
+		
+		<!-- Temperature Sensors -->
+		<streamSelector id="temperature1">
+            <select type="spatial">POLYGON ((23.78298 38.15828, 23.80770 38.11142, 23.82109 38.12574, 23.82315 38.14626, 23.83963 38.15085, 23.81800 38.17191, 23.78298 38.15828))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</select>
+        </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<!-- CUMSUM for Humidity Sensor Streams -->
+		<contextor id="cumsumHum1">
+            <algorithm name="CUMSUM">
+				<iparam name="target-value">75</iparam>
+                <iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">15</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">5</iparam>
+				<iparam name="detection-type">below</iparam>
+            </algorithm>
+            <sources>
+                <src selector="humidity1"/>                                
+            </sources>
+        </contextor>
+		
+		<!-- CUMSUM for Temperature Sensor Streams -->
+		<contextor id="cumsumTemp1">
+            <algorithm name="CUMSUM">
+				<iparam name="target-value">0</iparam>
+				<iparam name="above-tolerance">15</iparam>
+                <iparam name="below-tolerance">10</iparam>
+				<iparam name="above-threshold">5</iparam>
+                <iparam name="below-threshold">3</iparam>
+				<iparam name="detection-type">above</iparam>
+            </algorithm>
+            <sources>
+                <src selector="temperature1"/>                                
+            </sources>
+        </contextor>
+		
+		<!-- Average for Humidity Sensor Streams -->
+		<contextor id="AvHum1">
+            <algorithm name="Average">
+				<iparam name="type">soft</iparam>
+			</algorithm>
+            <sources>
+                <src selector="cumsumHum1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Average for Temperature Sensor Streams -->
+		<contextor id="AvTemp1">
+            <algorithm name="Average">
+				<iparam name="type">soft</iparam>
+			</algorithm>
+            <sources>
+                <src selector="cumsumTemp1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Buffered Mean for Humidity Average -->
+		<contextor id="MeanHum1">
+            <algorithm name="Mean">
+				<iparam name="buffer">10</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvHum1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Buffered Mean for Temperature Average -->
+		<contextor id="MeanTemp1">
+            <algorithm name="Mean">
+				<iparam name="buffer">10</iparam>
+			</algorithm>
+            <sources>
+                <src selector="AvTemp1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Linear Opinion Pool for the combination of Humidity and Temperature change detection -->
+		<contextor id="LOP1">
+            <algorithm name="LinearOpinionPool">
+				<iparam name="weight-list">0.6;0.4</iparam>
+			</algorithm>
+            <sources>
+                <src selector="MeanHum1"/>  
+				<src selector="MeanTemp1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Certainty Mapper -->
+		<contextor id="CertaintyMapper1">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.1;0.5;1.0</iparam>
+				<iparam name="mapping-values">Unlikely;Possible;Likely</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="LOP1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Email Certainty Mapper -->
+		<contextor id="EmailCertaintyMapper1">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.5;1.0</iparam> <!-- Produce email when incident's certainty is "likely" -->
+				<iparam name="mapping-values">true</iparam>
+				<iparam name="default">false</iparam>
+			</algorithm>
+            <sources>
+                <src selector="LOP1"/>    				
+            </sources>                                                  
+        </contextor>
+	</contextors>
+</fusion-application>

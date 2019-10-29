@@ -1,0 +1,2 @@
+lat	lon	title	icon	iconSize	iconOffset	description	popupSize
+50.95860	13.95307	"Klinikum Pirna"	./images/red_cross.png	24,24	0,-24	...	200,80

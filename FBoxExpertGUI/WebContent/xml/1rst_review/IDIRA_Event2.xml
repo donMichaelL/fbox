@@ -1,0 +1,72 @@
+<fusion-application id="IDIRA_Event2" description="PeopleInDanger">
+	
+	<output>
+		<out id="Out1">
+            <formatter type="cap">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">People in Danger</iparam>
+                <iparam name="headline">People in Danger</iparam>
+                <iparam name="description">People in danger due to a flood event in the wider area</iparam>
+                <iparam name="areaDesc">Hospital in Pirna</iparam>
+                <iparam name="circle">50.95860,13.95307 1.0</iparam>
+                <iparam name="urgency">Immediate</iparam>
+                <iparam name="severity">Extreme</iparam>
+				<iparam name="applicationID">2</iparam>
+				<iparam name="category">Safety</iparam>
+            </formatter>
+            <adapter type="capHttp">
+				<iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>                            
+            <sources>
+                <src id="B"/>
+            </sources>
+        </out>
+		<out id="Out2">
+                        <formatter type="sos">
+                            <iparam name="register-template">http://wand.di.uoa.gr:9080/FBoxDeployer/templates/sos/Template_RegisterSensor_Measurement.xml</iparam>
+                            <iparam name="insert-template">http://wand.di.uoa.gr:9080/FBoxDeployer/templates/sos/Template_InsertObservation_Measurement.xml</iparam>
+                            <iparam name="owner">NKUA</iparam>
+                            <iparam name="unique-id">SensorFusionEngine-2</iparam>
+                            <iparam name="phenomenon-urn">peopleInDanger</iparam>
+                            <iparam name="latitude">13.95307</iparam>
+                            <iparam name="longitude">50.95860</iparam>
+                        </formatter>                                               
+                        
+                        <adapter type="http">
+                                <iparam name="url">http://wand.di.uoa.gr:9080/fusion-scenario/sos</iparam>
+                        </adapter>
+                        <sources>
+                                <src id="B"/>
+                        </sources>
+        </out>
+	</output>
+	
+	<streamers>
+		<streamSelector id="SFE">
+                 <select type="identity">urn:ogc:object:feature:sensor:NKUA:SensorFusionEngine</select>
+         </streamSelector>
+		 <streamSelector id="FLEXIT">
+                 <select type="identity">urn:ogc:object:feature:sensor:FLEXIT:flexit-demonstrator-1</select>
+         </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<contextor id="A">
+            <algorithm name="ZeroToOneMapping">
+				<iparam name="maxCapacity">1500</iparam>
+            </algorithm>
+            <sources>
+                <src selector="FLEXIT"/>                                
+             </sources>                                                  
+         </contextor>
+		 <contextor id="B">
+            <algorithm name="AggregateEqually"/>
+            <sources>
+                <src selector="A"/>   
+				<src selector="SFE"/>				 
+             </sources>                                                  
+         </contextor>
+	</contextors>
+	
+</fusion-application>

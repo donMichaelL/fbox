@@ -1,0 +1,45 @@
+<fusion-application id="AppID" description="AppDesc">
+	
+	<!-- 
+		A Fusion Application Script should necessarily contain the following sections:
+			a. The "streamers" section where the fusion expert defines the sensor streams that are going to be taken into account
+			b. The "contextors" section where the appropriate algorithms (SISO or MISO) and their inputs streams are listed
+			c. The "output" section where the containers of the SFE's result (e.g. Email, CAP message etc.) are specified
+	-->
+	<output>
+		<!--
+			For each output container the following must be defined:
+				a. The output stream (or streams) that is going to be published by this container.
+			    b. The formatter that should be used to transform these data in the appropriate format.
+			    c. The adapter that defines the transfer protocol (e.g. http, email etc.) for the formatter's outcome.
+				
+			The input stream (or streams) for such a container must come from the "contextors" section and not directly from the "streamers" section.
+		-->
+	</output>
+	
+	<streamers>
+		<!--
+			The sensor streams that are going to be used for the fusion scenario should be defined here.
+			These streams can be selected by the following "filters":
+				a. Unique ID (type=identity)
+				b. Phenomenon URN (type=phenomenon) 
+				c. Location (type=spatial)
+			
+			The latter case stands for the need of spatial selection of sensor streams in an area of interest.
+		-->
+	</streamers>
+	
+	<contextors>
+		<!--
+			The algorithms that are going to be used must be specified here.
+			We can have SISO (singe input, single output) or MISO (multiple input, single output) algorithms.
+			Each algorithm is encapsulated inside a "contextor" and in order to be defined correctly, the following are required:
+				a. Algorithm's name
+				b. Algorithm's parameters (should there are any)
+				c. Algorithm's input stream (SISO) or streams (MISO)
+				
+			An input stream can be the output from another contextor or a streamer from the "streamers" section.
+		-->
+	</contextors>
+	
+</fusion-application>

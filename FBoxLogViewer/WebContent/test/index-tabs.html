@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Sensor Integration - Applications</title>
+
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+   
+		<!-- jQuery UI -->
+		<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+    	
+    	
+    	<!-- <script type="text/javascript" src="jquery-ui-1.8.23.custom/development-bundle/ui/minified/jquery.ui.tabs.min.js"></script>  -->
+    
+    
+		<script type="text/javascript">
+			$(function() {
+				$('#tabs').tabs();
+			});
+			
+			// var $tabs = $('example').tabs();
+		/*	$('ul.tabs').each(function() {
+				var $active, $content, $links = $(this).find('a');
+
+				$active = $($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
+				$active.addClass('active');
+				$content = $($active.attr('href'));
+
+				// Hide the remaining content
+			    $links.not($active).each(function () {
+			        $($(this).attr('href')).hide();
+			    });
+
+			    // Bind the click event handler
+			    $(this).on('click', 'a', function(e){
+			        // Make the old tab inactive.
+			        $active.removeClass('active');
+			        $content.hide();
+
+			        // Update the variables with the new link and content
+			        $active = $(this);
+			        $content = $($(this).attr('href'));
+
+			        // Make the tab active.
+			        $active.addClass('active');
+			        $content.show();
+
+			        // Prevent the anchor's default click action
+			        e.preventDefault();
+			}); 
+			});*/
+		</script>
+	</head>
+<body>
+	<!--<h1>Sensor Integration - Applications</h1>
+	  <ul>
+		<li><a href="map.html">Map View</a></li>
+		<li><a href="log.html">Log View</a></li>
+		<li><a href="jQuery-Ajax.html">jQuery-Ajax</a></li>
+	</ul> -->
+	
+	<div id="tabs">
+		<ul>
+			<li><a href="map.html"><span>Tab1</span></a></li>
+			<li><a href="log.html">Tab2</a></li>
+			<li><a href="#tabs-3">Tab3</a></li>
+		</ul>
+	
+	<!-- 
+		<div id="tabs-1">
+			<p>Thi is the first tab</p>
+		</div>
+		<div id="tabs-2">
+			<p>Thi is the second tab</p>
+		</div> -->
+		<div id="tabs-3">
+			<p>Thi is the third tab</p>
+		</div> 
+	</div>
+</body>
+</html>

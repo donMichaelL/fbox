@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>DataTables - AJAX source example</title>
+	
+    <!--
+    <style type="text/css">
+      @import "DataTables-1.9.3/media/css/demo_page.css";
+      @import "DataTables-1.9.3//media/css/demo_table.css";
+    </style> -->
+    
+    <!-- CSS -->
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/demo_page.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/demo_table.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/demo_table_jui.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/jquery.dataTables_themeroller.css"/>
+    
+    <!-- JQuery UI-->
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.8.23.custom/css/custom-theme/jquery-ui-1.8.23.custom.css"/>
+   
+    <!-- Javascript -->
+    <script type="text/javascript" src="DataTables-1.9.3/media/js/jquery.js"></script>
+    <script type="text/javascript" src="DataTables-1.9.3/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="DataTables-1.9.3/media/js/jquery.dataTables.js"></script>
+    
+    <!-- <script type="text/javascript" src="jquery-ui-1.8.23.custom/js/jquery-1.8.0.min.js"></script> -->
+    <script type="text/javascript" src="jquery-ui-1.8.23.custom/js/jquery-ui-1.8.23.custom.min.js"></script>
+    
+    <script type="text/javascript">
+		$(document).ready(function() {
+			testTable = $('#test-rendering-engines').dataTable({
+				"sPaginationType": "full_numbers",
+				"bFilter": true,
+				"bJQueryUI": true,			// Enable JQueryUI (themes cretaed by ThemeRoller)
+				"sAjaxSource": 'data/test.txt',
+				"aoColumns": [
+					// { "sClass": "center" },
+    				{ "sTitle": "Rendering engine" },
+					{ "sTitle": "Browser" },
+					{ "sTitle": "Platform(s)" },
+					{ "sTitle": "Engine version"},
+					{ "sTitle": "CSS grade"}
+				],
+				"aaSorting": [[0, "desc"]], // Predefined sorting 
+			});
+			
+			poisTable = $('#sensor-pois').dataTable({
+				// "sPaginationType": "full_numbers",
+				// "bFilter": true,
+				"bJQueryUI": true,			// Enable JQueryUI (themes cretaed by ThemeRoller)
+				"bProcessing": true,
+        		
+				"bServerSide": true,
+				"sAjaxSource": "SOSManager",
+				"sAjaxDataProp" : "data",
+				"aoColumns": [
+					{ "mData": "procedureID" },
+					{ "mData": "timeStamp" },
+					{ "mData": "latitude" },
+					{ "mData": "longtitude" }
+					
+				],
+				"aaSorting": [[0, "desc"]], // Predefined sorting 
+                 
+			});
+			
+		});
+	</script>
+</head>
+<body id="dt_example">
+		<div id="header">
+        	<h1 align="center">DataTables - AJAX source example</h1>
+        </div>
+        
+         <br>
+         
+         <div id="test-wrapper">
+			<table id="test-rendering-engines" class="display">
+            	<thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+         </div>
+         
+         <br>
+         
+         <div id="sensors-pois-wrapper">
+			<table id="sensor-pois" class="display">
+            	<thead>	
+                	
+                	<tr>
+                    	<th>SensorID</th>
+                        <th>Timestamp</th>
+                        <th>Latitude</th>
+                        <th>Longtitude</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+		</div>
+	
+</body>
+</html>

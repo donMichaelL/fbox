@@ -1,0 +1,17 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false
+#Owner = VIRTUAL
+#Phenomenon = temperature
+#Phenomenon_Unit = celcius
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#Vienna-Temp-Test-0 16.18487 48.26006 true
+
+#unique_id timestamp longitude latitude temperature
+Vienna-Temp-Test-0 3350 16.18487 48.26006 3.98
+Vienna-Temp-Test-0 23350 16.18487 48.26006 6.81
+Vienna-Temp-Test-0 43350 16.18487 48.26006 5.61
+Vienna-Temp-Test-0 63350 16.18487 48.26006 6.31
+Vienna-Temp-Test-0 83350 16.18487 48.26006 32.52

@@ -1,0 +1,17 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false 
+#Owner = WAPMERR
+#Phenomenon = earthquake
+#Phenomenon_Unit = magnitude
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#earthquake-1 16.92851 48.23363 true
+
+#unique_id timestamp longitude latitude earthquake
+earthquake-1 31600 16.92851 48.23363 7.2
+earthquake-1 41600 16.92851 48.23363 7.2
+earthquake-1 51600 16.92851 48.23363 7.2
+earthquake-1 61600 16.92851 48.23363 7.2
+earthquake-1 71600 16.92851 48.23363 7.2

@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+#sensors-values-header h2 {
+	text-align: center;
+	margin: 8px auto;
+	//vertical-align: middle;
+}

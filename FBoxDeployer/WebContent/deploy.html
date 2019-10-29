@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<link rel="icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<title>Fusion Engine - Deploy Fusion Scripts</title>
+
+		 <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+		 
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/deployer.css"/>
+		<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+		
+   		<!-- ~~~~~~~~~~ script(s) ~~~~~~~~~~ -->		
+    	<!-- libraries -->
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+        
+        <!-- <script type="text/javascript" src="libs/OpenLayers.js"></script>  -->
+        <!-- application script(s) -->
+        <!-- 
+        <script type="text/javascript" src="js/pois.js"></script>
+         -->
+    	
+    	<script type="text/javascript">
+    		$(document).ready(function() {
+				$("input[type=submit], input[type=reset], button").button();
+
+				$("#loading-spinner").bind("ajaxSend", function() {
+						$(this).show();
+				}).bind("ajaxStop", function() {					
+					    $(this).hide();		
+			    }).bind("ajaxError", function() {
+					    $(this).hide();
+				});
+									
+	    	});
+
+    		$(function() {
+        		// Load script 1
+    		    $("#script1-button").click(function(event) {
+        		    // Read XML file...
+        		    $.ajax({
+            		    type: "GET",
+            		    url: "xml/IDIRA_Event1.xml",
+            		    dataType: "text",
+            		    success: function(xml) {
+                		    $("#script-text-area").val(xml);
+                		    // $("#script1-label").val("Flooding Spots!");
+                		},
+                		error: function(xhr) {
+                    		alert("Error loading script 1.");
+                    	}
+            		
+            		});
+    		    });
+
+    		    // Load script 2
+    		    $("#script2-button").click(function(event) {
+        		    // Read XML file...
+        		    $.ajax({
+            		    type: "GET",
+            		    url: "xml/IDIRA_Event2.xml",
+            		    dataType: "text",
+            		    success: function(xml) {
+                		    // alert("Script 2 loading...");
+                		    $("#script-text-area").val(xml);
+                		},
+                		error: function(xhr) {
+                    		alert("Error loading script 2.");
+                    	}
+            		
+            		});
+    		    });
+
+    		    // Deployment
+    		    $("#deploy-button").click(function(event) {	
+        		    var scriptToSend = $("#script-text-area").val();
+
+        		    $("#deployment-dialog").dialog("open");
+        		    
+        		    if(scriptToSend != '') {
+        		    	//alert(scriptToSend);
+
+        		    	$.ajax({
+                		    type: "POST",
+                		    url: "http://satia.di.uoa.gr:9080/FusionCore/DeployApplication",
+                		    dataType: "text",
+                		    data: "source=" + scriptToSend,
+                		    success: function(response) {
+                    		    //alert(response);
+                    		    var textToDisplay;
+                    		    if (response==0)
+                    		    	textToDisplay= "Deployment Successful!";
+                    		    else
+                    		    	textToDisplay = "Deployment Failed!";
+                		    	$("#deployment-dialog").text(textToDisplay);
+                    		},
+                    		error: function(response) {
+                        		$("#deployment-dialog").text("Deployment Error!");
+                        		//$("#deployment-dialog").dialog({
+                                	// title: "Error in deployment!"	
+                        		//}).dialog('open');
+                        	}
+                		});  
+
+        		    } else {
+        		    	$("#deployment-dialog").text("No data to send! Please select fusion script!");
+            		}	 
+            		    
+    		    	  		    	
+    		    });
+
+    		    // Clear
+    		    $("#clear-button").click(function(event) {	
+    		    	$("#script-text-area").val('');	    	
+    		    });
+
+    		    
+    		    $("#deployment-dialog").dialog({
+        		    autoOpen: false,
+        		    show: "blind"
+        		    // hide: "explode"
+        		});       		
+    		 });
+
+    		// Click event on upload button.
+    		$(function() {
+    		    $("input[type=file]").click(function(event) {
+    		    	var xmlScript = $("#upload-btn").val();
+    		    	alert(xmlScript);
+    		    });
+    		 });
+    		 				
+		</script>
+		<!-- ~~~~~~~~~~ end script(s) ~~~~~~~~~~ -->
+
+	</head>
+<body>
+	<div id="main-wrapper">
+		
+		<div id="header-wrapper">
+			<div id="header-logo">
+				<img alt="idira-logo" src="images/logos/idira_logo.png">
+			</div>
+			
+			<div id="header-title">
+				<h2>Sensor Fusion Engine - Deploy Scripts</h2>
+			</div>
+			<div id="header-toolbar">
+					<!-- 
+					<div id="radio-buttons">
+						<input type="radio" id="radio1" name="view-radio" value="map" /><label for="radio1">Map View</label>
+						<input type="radio" id="radio2" name="view-radio" value="log" /><label for="radio2">Log View</label>
+					</div>
+					 -->
+			</div>
+		</div>
+		
+		<div id="content-wrapper">
+			<!-- 
+				<label for="upload-btn">Upload Fusion Script:</label>
+				<button id="fusion-script-upload" type="file"></button>
+				<input type="file" id="upload-btn" name="upload-btn" accept="application/xml" /> 
+			-->
+			<div id="deployment-content">
+				<input type="submit" id="script1-button" value="Load script 1" class="small_buttons"/>
+				<input type="submit" id="script2-button" value="Load script 2" class="small_buttons" />
+			
+				<br>
+				<textarea id="script-text-area" rows="45" cols="130" name="script-text-area"></textarea>
+			
+				<br>
+				<button id="deploy-button">Deploy</button>
+				<button id="clear-button">Clear</button>
+			</div>
+			
+			<!-- <label for="script1-button" id="script1-label">Info:</label> -->
+			
+			<!--  
+			<form action="DeployApplication" method="post">
+				<textarea id="script-text-area" rows="45" cols="130" name="script-text-area"></textarea>
+				<p>
+				<input type="submit" value="Deploy">
+				<input type="reset" value ="Clear">
+			</form>
+			-->
+			
+			<div id="deployment-dialog" title="Deployment Status">
+				<div id="loading-spinner" class="loading-spinner" style="display:none;">
+		  			<p>
+		  				<img src="images/ajax-loader.gif" alt="Loading"/>
+		  				<br>Deploying fusion script...
+		  			</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 
+		<div id="footer">
+			<p><strong>Pervasive Computing Research Group</strong></p>
+		</div>  -->  
+	</div>
+</body>
+</html>

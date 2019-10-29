@@ -1,0 +1,12 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false
+#Owner = NKUA
+#Phenomenon = temperature
+#Phenomenon_Unit = celcius
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#Temp-Sensor-14 48.89146 -18.28142 true
+
+#unique_id timestamp longitude latitude temperature

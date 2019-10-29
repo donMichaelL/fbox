@@ -1,0 +1,51 @@
+<fusion-application id="Light_Scenario" description="MOBICS">
+	<output>
+		<out id="Out1">
+			<formatter type="expoForm">
+			</formatter>
+			
+            <adapter type="mqAdapter">
+                <iparam name="mqurl">tcp://light.di.uoa.gr:61616</iparam>
+				<iparam name="mqid">MOBICS_TEST</iparam>
+				<iparam name="topic">false</iparam>
+				<iparam name="transacted">false</iparam>
+            </adapter>
+			<!--
+			<adapter type="http">
+                <iparam name="url">http://localhost:9080/fusion-scenario/sos</iparam>
+            </adapter>
+			-->
+            <sources>
+                <src id="AV"/>
+            </sources>
+        </out>
+	</output>
+	
+	<streamers>
+		<streamSelector id="SunSPOTs"> <!-- Light Sensors near EXPO's Area -->
+            <select type="spatial">POLYGON ((23.76219 37.98921, 23.76453 37.98921, 23.76453 37.98806, 23.76219 37.98806, 23.76219 37.98921))</select>
+			<select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:light</select>
+        </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<contextor id="Thresholders"> <!-- This will build 3 thresholders --> 
+            <algorithm name="Threshold">
+				<iparam name="computation-type">hard</iparam>
+                <iparam name="operator">lt</iparam>
+                <iparam name="value">15</iparam>
+            </algorithm>
+            <sources>
+                <src selector="SunSPOTs"/>                                
+            </sources>                                                  
+        </contextor>
+		<contextor id="AV"> <!-- This will calculate the average value only if all the available thresholders give a value -->
+            <algorithm name="Average">
+				<iparam name="type">hard</iparam>
+			</algorithm>
+            <sources>
+                <src selector="Thresholders"/>    				
+            </sources>                                                  
+        </contextor>
+	</contextors>
+</fusion-application>

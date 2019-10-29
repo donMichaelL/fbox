@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<link rel="icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<title>Sensor Fusion Engine - Manage Deployments</title>
+
+		 <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+		
+   		<!-- ~~~~~~~~~~ script(s) ~~~~~~~~~~ -->		
+    	<!-- libraries -->
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+        
+        <!-- application script(s) -->
+        
+    	<script type="text/javascript">
+    		$(document).ready(function() {
+    			fnDeployInitComponents();
+    			fnDeployEnableEventListeners();
+    			
+        	}); 
+
+        	function fnDeployInitComponents () {
+      			$("#radio-buttons").buttonset();
+    			$("input:radio[name=view-radio]:first").attr('checked', true);
+    			$("#content-wrapper").load("deployView.html");
+          	 }
+
+          	 function fnDeployEnableEventListeners() {
+          		$("input:radio[name=view-radio]").click(function(){
+
+        		    var value = $(this).val();
+
+        		    if(value == "appRegistryView") {
+        		    	$("#content-wrapper").empty();
+        		    	$("#content-wrapper").load("appRegistryView.html");
+            		} else {
+                		// $("#content-wrapper").empty();
+                		// $("#content-wrapper").load("deployView.html");
+                		location.reload();
+                	}
+    		          // $('#content-wrapper').hide();
+    		          // $("#content-wrapper").show('slow');
+    		    });
+             }
+		</script>
+		<!-- ~~~~~~~~~~ end script(s) ~~~~~~~~~~ -->
+
+	</head>
+<body>
+	<div id="main-wrapper">
+		
+		<div id="header-wrapper">
+			<div id="header-logo">
+				<img alt="logo" src="images/logos/SWeFS_logo.png">
+			</div>
+			
+			<div id="header-title">
+				<h2>Fusion Module - Manage Deployments</h2>
+			</div>
+			
+			<div id="header-toolbar">
+					<div id="radio-buttons">
+						<input type="radio" id="radio1" name="view-radio" value="deployView" /><label for="radio1">Deploy View</label>
+						<input type="radio" id="radio2" name="view-radio" value="appRegistryView" /><label for="radio2">Registry View</label>						
+					</div>
+			</div>
+			
+			<div id="header-controls">
+				<div id="header-logout-control" title="Logout">			
+					<a href="LogoutServlet">
+						<img alt="logout-control" src="images/controls/logout4.png">
+					</a>
+				</div>
+			
+			</div>			
+		</div>
+		
+		<div id="content-wrapper">
+		</div>
+		
+		<!-- 
+		<div id="footer">
+			<p><strong>Pervasive Computing Research Group</strong></p>
+		</div>  -->  
+	</div>
+	
+	
+	 
+</body>
+</html>

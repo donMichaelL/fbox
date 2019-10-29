@@ -1,0 +1,29 @@
+<fusion-application id="Simple_Spatial" description="PeopleInDanger">
+	
+	<streamers>
+		<streamSelector id="tablet1-gps-ss">
+                 <select type="identity">urn:ogc:object:feature:sensor:IDIRA:tablet1-gps</select>
+         </streamSelector>
+		 <streamSelector id="tablet1-RSSI-ss">
+                 <select type="identity">urn:ogc:object:feature:sensor:IDIRA:tablet1-RSSI</select>
+         </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<contextor id="tablet1-gps-identity">
+            <algorithm name="Identity">
+            </algorithm>
+            <sources>
+                <src selector="tablet1-gps-ss"/>                                
+             </sources>                                                  
+         </contextor>
+		 
+		 <contextor id="tablet1-RSSI-identity">
+            <algorithm name="Identity">
+            </algorithm>
+            <sources>
+                <src selector="tablet1-RSSI-ss"/>                                
+             </sources>                                                  
+         </contextor>
+	</contextors>
+</fusion-application>

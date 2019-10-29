@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>DataTables - DOM source example</title>
+	
+    <!--
+    <style type="text/css">
+      @import "DataTables-1.9.3/media/css/demo_page.css";
+      @import "DataTables-1.9.3//media/css/demo_table.css";
+    </style> -->
+    
+    <!-- CSS -->
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/demo_page.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/demo_table.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/demo_table_jui.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.9.3/media/css/jquery.dataTables_themeroller.css"/>
+    
+    <!-- JQuery UI-->
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.8.23.custom/css/custom-theme/jquery-ui-1.8.23.custom.css"/>
+   
+    <!-- Javascript -->
+    <script type="text/javascript" src="DataTables-1.9.3/media/js/jquery.js"></script>
+    <script type="text/javascript" src="DataTables-1.9.3/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="DataTables-1.9.3/media/js/jquery.dataTables.js"></script>
+    
+    <script type="text/javascript" src="jquery-ui-1.8.23.custom/js/jquery-ui-1.8.23.custom.min.js"></script>
+    
+    <script type="text/javascript">
+		$(document).ready(function() {
+			valuesTable = $('#sensors-values').dataTable({
+				"sPaginationType": "full_numbers",
+				"bFilter": true,
+				"bJQueryUI": true,			// Enable JQueryUI (themes cretaed by ThemeRoller)
+				"aaSorting": [[0, "desc"]], // Predefined sorting 
+			}); 
+			
+		});
+	</script>
+</head>
+<body id="dt_example">
+		<div id="header">
+        	<h1 align="center">DataTables - DOM source example</h1>
+        </div>
+        
+		
+        <div>
+        	<br></br>
+        </div>
+		 
+        <div id="sensors-values-wrapper">
+            <table id="sensors-values" class="display">
+                <thead>	
+                    <tr>
+                    	<th>Timestamp</th>
+                        <th>SensorID</th>
+						<th>Phenomenon</th>
+                        <th>IsMobile</th>
+                        <th>Latitude</th>
+                        <th>Longtitude</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    	<td class="center">2012-09-17 16:04:33+03</td>
+                        <td class="center">urn:ogc:SFE:DavisWeatherStation</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">14.34456789</td>
+                        <td class="center">35.793874932</td>
+                        <td class="center">30</td>
+                    </tr>
+                    <tr>
+                    	<td class="center">2012-09-16 12:42:14+03</td>
+                        <td class="center">urn:ogc:SFE:GaugingStation-13</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">14.93247932</td>
+                        <td class="center">35.45213981</td>
+                        <td class="center">32</td>
+                    </tr>
+                     <tr>
+                     	<td class="center">2012-09-17 16:04:33+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-88</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">11.35435453</td>
+                        <td class="center">37.23423802</td>
+                        <td class="center">35</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-20 18:34:53+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-12</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">10.99324234</td>
+                        <td class="center">37.74932492</td>
+                        <td class="center">36</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-19 16:09:33+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-34</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">12.98432734</td>
+                        <td class="center">36.93281231</td>
+                        <td class="center">29</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-18 16:04:33+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-56</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+						<td class="center">N</td>
+                        <td class="center">12.11233879</td>
+                        <td class="center">37.98332323</td>
+                        <td class="center">30</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-17 16:10:33+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-71</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">12.78349204</td>
+                        <td class="center">38.34324342</td>
+                        <td class="center">27</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-17 16:04:54+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-62</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">11.67643843</td>
+                        <td class="center">37.03424234</td>
+                        <td class="center">28</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-17 16:04:38+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-10</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">11.04392032</td>
+                        <td class="center">36.99983233</td>
+                        <td class="center">25</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-17 16:06:33+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-8</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">11.76868762</td>
+                        <td class="center">37.89002323</td>
+                        <td class="center">25</td>
+                    </tr>
+                    <tr>
+                     	<td class="center">2012-09-17 16:05:33+03</td>
+                        <td class="center">urn:ogc:SFE:WeatherStation-88</td>
+						<td class="center">urn:ogc:def:phenomenon:OGC:1.0.30:temperature</td>
+                        <td class="center">N</td>
+                        <td class="center">11.94324874</td>
+                        <td class="center">39.89723232</td>
+                        <td class="center">26</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div> 
+</body>
+</html>

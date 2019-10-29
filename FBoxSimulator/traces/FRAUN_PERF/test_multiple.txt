@@ -1,0 +1,18 @@
+#METADATA SECTION
+#Type = Observation
+#Mobile = false
+#Owner = VIRTUAL
+#Phenomenon = [humidity,precipitation,winddirection,temperature,pressure,windspeed]
+#Phenomenon_Unit = [%,mm/m²,°,°C,hPa,m/s]
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#WEATHER_STATION_TEST_81 14.05701 46.75000 true
+
+#unique_id timestamp longitude latitude humidity precipitation winddirection temperature pressure windspeed
+WEATHER_STATION_TEST_81 4000 14.05701 46.75000 100 2.2 225.0 14.7 1013.6 1.6
+WEATHER_STATION_TEST_81 24000 14.05701 46.75000 100 2.4 225.0 14.7 1013.4 3.2
+WEATHER_STATION_TEST_81 44000 14.05701 46.75000 100 2.8 225.0 14.6 1013.2 1.6
+WEATHER_STATION_TEST_81 64000 14.05701 46.75000 100 2.8 225.0 14.4 1013.2 3.2
+WEATHER_STATION_TEST_81 84000 14.05701 46.75000 100 3.0 225.0 14.3 1013.4 1.6
+WEATHER_STATION_TEST_81 104000 14.05701 46.75000 100 3.2 225.0 14.3 1013.4 1.6

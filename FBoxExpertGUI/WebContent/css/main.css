@@ -1,0 +1,177 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height:100%;
+	background-color: #EEEEEE;
+}
+
+#main-wrapper {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height:100%;
+} 
+
+#header-wrapper {
+	background-color: #5C9CCC; /* Blue */
+	text-align: center;
+	width: 100%;
+	height: 5%;
+	min-height:45px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	// border-radius: 5px;
+}
+
+#content-wrapper {
+	background-color: #EEEEEE; /* Grey */
+	width: 100%;
+    height:95%;
+    // min-height:100%;
+	// height: 840px;
+	// float:left;
+	clear:both;
+	margin: 0;
+	padding: 0;
+	// border-radius: 5px;
+	
+}
+
+#footer{
+	width: 100%;
+	height:20px;
+	margin: 0;
+	padding: 0;
+	background-color: #5C9CCC; /* Blue */
+	clear:both;
+	text-align:center; 
+}
+
+#header-logo {
+	margin: 0;
+	padding: 0;
+	float:left;
+	width: 10%;
+	height: 100%;
+}
+
+#header-title {
+	margin: 0;
+	padding: 0;
+	color: #FFFFFF;
+	float:left;
+	width: 40%;
+	height: 100%;
+	text-align: left;
+	// background-color: #FF0000; /* Red */
+}
+
+#header-toolbar {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 45%;
+	height: 100%;
+	// background-color: #FFFF00; /* Yellow */	
+}
+
+#radio-buttons {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	// background-color: #FFA500; /* Orange */
+}
+
+#header-controls {
+	margin: 0;
+	padding: 0;
+	float: right;
+	width: 5%;
+	height: 100%;
+	// background-color: #FF0000; /* Red */	
+}
+
+#header-logout-control {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	// text-align: center;
+	// background-color: #FFA500; /* Orange */
+}
+
+#header-logout-control img {
+	height: 24px; 
+	align: center; 
+	margin: 10px auto; 
+}
+
+#header-title h2 {
+	margin: 8px auto;
+	padding: 0;
+}
+
+#footer p {
+	margin: 0;
+	padding: 0;
+	color: #FFFFFF;
+	// background-color: #5C9CCC;
+}
+
+
+#header-toolbar .ui-button{
+	font-size: 10px;
+ 	text-align: center;
+ 	margin: 10px auto; 
+    // background:#5C9CCC ; /* Blue */
+}
+
+
+#header-logo img {
+	height: 30px; 
+	align: center; 
+	margin: 8px auto; 
+}
+
+#form-wrapper {
+    position: relative;
+    padding: 10%;
+}
+
+
+#signIn-form-div {
+    width: 250px;
+    background: #5C9CCC;
+    position: relative;
+    margin: auto;
+    // text-align: center;
+    padding: 2%;
+    border-style: dashed;
+	border-width: thin;
+	border-color: #FAEBD7;
+}
+
+#signIn-div, #username-div, #passwd-div, #signIn-controls-div {
+	margin-bottom: 5px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.signIn-label {
+	font-size: 1.5em;
+	color:#FFF; // white
+}
+
+.username-label, .passwd-label {
+	font-size: 1.0em;
+	font-weight:bold;
+	color:#FFF; // white
+}
+
+.username-input, .passwd-input {
+	width:230px;
+}
+

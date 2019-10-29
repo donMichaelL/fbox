@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="FBoxAlgorithms">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="FusionAlgorithms.jar" deploy-path="/" handle="module:/resource/FusionAlgorithms/FusionAlgorithms">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.sos.jar" deploy-path="/lib" handle="module:/resource/org.sos/org.sos">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="caplib.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/caplib.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="activemq-all-5.7.0.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/activemq-all-5.7.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-annotations-2.0.6.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/jackson-annotations-2.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-core-2.0.6.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/jackson-core-2.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-databind-2.0.6.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/jackson-databind-2.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="edxl-inbound-service.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/edxl-inbound-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

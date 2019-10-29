@@ -1,0 +1,310 @@
+<fusion-application id="IDIRA_Event1" description="FloodEvent">
+
+        <output>
+                <out id="Out1">
+                        <formatter type="sos">
+                            <iparam name="register-template">http://wand.di.uoa.gr:9080/FBoxDeployer/templates/sos/Template_RegisterSensor_Measurement.xml</iparam>
+                            <iparam name="insert-template">http://wand.di.uoa.gr:9080/FBoxDeployer/templates/sos/Template_InsertObservation_Measurement.xml</iparam>
+                            <iparam name="owner">NKUA</iparam>
+                            <iparam name="unique-id">SensorFusionEngine</iparam>
+                            <iparam name="phenomenon-urn">floodEvent</iparam>
+                            <iparam name="latitude">14.05696</iparam>
+                            <iparam name="longitude">50.94873</iparam>
+                        </formatter>                                               
+                        
+                        <adapter type="http">
+                                <iparam name="url">http://wand.di.uoa.gr:9080/fusion-scenario/sos</iparam>
+                        </adapter>
+                        <sources>
+                                <src id="LP1"/>
+                        </sources>
+                </out>
+                <out id="Out2">
+                        <formatter type="cap">
+                                <iparam name="sender">SFE</iparam>
+                                <iparam name="addresses">NKUA</iparam>
+                                <iparam name="event">Flooding Event</iparam>
+                                <iparam name="headline">Flood Event</iparam>
+                                <iparam name="description">Flood event due to increase in water level in the wider area</iparam>
+                                <iparam name="areaDesc">Dresden</iparam>
+                                <iparam name="circle">50.94873,14.05696 6.5</iparam>
+                                <iparam name="urgency">Expected</iparam>
+                                <iparam name="severity">Severe</iparam>
+								<iparam name="applicationID">1</iparam>
+								<iparam name="category">Met</iparam>
+                        </formatter>
+                        <adapter type="capHttp">
+                        	<iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+                        </adapter>
+                        <sources>
+                                <src id="LP1"/>
+                        </sources>
+                </out>
+        </output>
+        
+        <streamers>
+                <streamSelector id="G1">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_501040</select>
+                </streamSelector>
+                <streamSelector id="G2">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_501010</select>
+                </streamSelector>
+                <streamSelector id="G3">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550190</select>
+                </streamSelector>
+                <streamSelector id="G4">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550100</select>
+                </streamSelector>
+                <streamSelector id="G5">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550302</select>
+                </streamSelector>
+                <streamSelector id="G6">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550810</select>
+                </streamSelector>
+                <streamSelector id="G7">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550390</select>
+                </streamSelector>
+                <streamSelector id="G8">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550620</select>
+                </streamSelector>
+                <streamSelector id="G9">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550490</select>
+                </streamSelector>
+                <streamSelector id="G10">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550560</select>
+                </streamSelector>
+                <streamSelector id="G11">
+                        <select type="identity">urn:ogc:object:feature:sensor:Idira:GAUGING_STATION_550710</select>
+                </streamSelector>
+                <streamSelector id="W1">
+                        <select type="identity">urn:ogc:object:feature:sensor:Wedaal:WEATHER_STATION_85</select>
+                        <select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:precipitation</select>
+                </streamSelector>
+                <streamSelector id="W2">
+                        <select type="identity">urn:ogc:object:feature:sensor:Wedaal:WEATHER_STATION_71</select>
+                        <select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:precipitation</select>
+                </streamSelector>
+                <streamSelector id="W3">
+                        <select type="identity">urn:ogc:object:feature:sensor:Wedaal:WEATHER_STATION_131</select>
+                        <select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:precipitation</select>
+                </streamSelector>
+                <streamSelector id="W4">
+                        <select type="identity">urn:ogc:object:feature:sensor:Wedaal:WEATHER_STATION_132</select>
+                        <select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:precipitation</select>
+                </streamSelector>
+                <streamSelector id="DAVIS">
+                        <select type="identity">urn:ogc:object:feature:sensor:NKUA:DAVIS-Station</select>
+                        <select type="phenomenon">urn:ogc:def:phenomenon:OGC:1.0.30:rainRate</select>
+                </streamSelector>
+        </streamers>
+        
+        <contextors>
+                <contextor id="T1">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">500</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G1"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T2">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">500</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G2"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T3">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">110</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G3"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T4">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">35</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G4"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T5">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">59</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G5"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T6">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">75</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G6"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T7">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">50</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G7"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T8">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">70</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G8"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T9">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">40</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G9"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T10">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">20</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G10"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T11">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">33</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="G11"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T12">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">12</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="W1"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T13">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">3</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="W2"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T14">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">20</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="W3"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T15">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">25</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="W4"/>                                
+                        </sources>                                                  
+                </contextor>
+                <contextor id="T16">
+                        <algorithm name="Threshold">
+								<iparam name="computation-type">hard</iparam>
+                                <iparam name="operator">gt</iparam>
+                                <iparam name="value">200</iparam>
+                        </algorithm>
+                        <sources>
+                                <src selector="DAVIS"/>                             
+                        </sources>                                                  
+                </contextor>
+                <contextor id="SV1">
+                        <algorithm name="SimpleVoting">
+                                <iparam name="z-threshold">0.5</iparam>
+                        </algorithm>        
+                        <sources>
+                                <src id="T1"/>
+                                <src id="T2"/>
+                                <src id="T12"/>
+                        </sources>                        
+                </contextor>
+                <contextor id="SV2">
+                        <algorithm name="SimpleVoting">
+                                <iparam name="z-threshold">0.5</iparam>
+                        </algorithm>        
+                        <sources>
+                                <src id="T3"/>
+                                <src id="T4"/>
+                                <src id="T5"/>
+                                <src id="T6"/>
+                                <src id="T7"/>
+                                <src id="T13"/>
+                                <src id="T14"/>
+                                <src id="T15"/>
+                        </sources>                        
+                </contextor>
+                <contextor id="SV3">
+                        <algorithm name="SimpleVoting">
+                                <iparam name="z-threshold">0.5</iparam>
+                        </algorithm>        
+                        <sources>
+                                <src id="T8"/>
+                                <src id="T9"/>
+                                <src id="T10"/>
+                                <src id="T11"/>
+                        </sources>                        
+                </contextor>
+                <contextor id="LP1">
+                        <algorithm name="LinearOpinionPool">
+                                <iparam name="weight-list">0.4;0.3;0.15;0.15</iparam>
+                        </algorithm>                
+                        <sources> 
+                        		<src id="T16"/>              
+                                <src id="SV1"/>
+                                <src id="SV2"/>
+                                <src id="SV3"/>
+                        </sources>                        
+                </contextor>                
+        </contextors>
+</fusion-application>

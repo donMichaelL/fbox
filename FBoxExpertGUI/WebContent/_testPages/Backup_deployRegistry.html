@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Sensor Fusion Engine - Deployments Registry</title>
+		
+	    <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+	    <!-- DataTables -->
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_page.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_table.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/demo_table_jui.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/jquery.dataTables.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/media/css/jquery.dataTables_themeroller.css"/>
+	    <!-- Table Tools -->
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/extras/TableTools/media/css/TableTools.css"/>
+	    <link rel="stylesheet" type="text/css" href="libs/DataTables-1.9.3/extras/TableTools/media/css/TableTools_JUI.css"/>
+	    <!-- JQuery UI-->
+	    <link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+	   	<!-- application styles -->
+	    <link rel="stylesheet" type="text/css" href="css/registry.css"/>
+	  	<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+	  
+	    <!-- ~~~~~~~~~~ javascript ~~~~~~~~~~ -->
+	   	<!-- DataTables -->
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.dataTables.min.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/media/js/jquery.dataTables.js"></script>
+	    <!-- Table Tools -->
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/extras/TableTools/media/js/TableTools.min.js"></script>
+	    <script type="text/javascript" src="libs/DataTables-1.9.3/extras/TableTools/media/js/ZeroClipboard.js"></script>
+	    <!-- jQuery UI -->
+	    <script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+	    
+	    <!-- application js -->
+	    <!-- <script type="text/javascript" src="js/dt-deployments.js"></script>  --> 
+	    
+	    <script type="text/javascript">
+	    //	$(document).ready(function(){
+	    //		valuesTable = $('#deploy-registry-table').dataTable();
+	    //	});
+			// $(document).ready(init_dataTables);
+
+			// Redraw the table - Re-filter and resort (if enabled) the table before the draw.
+			// var pollPeriod = 20 * 1000; // In milli-seconds
+			// var pollingTimer = setInterval('valuesTable.fnDraw(true)', pollPeriod);
+			
+			
+			
+			<!-- ********************************************* -->
+/*
+			var giRedraw = false;
+
+			function fnGetSelected( oTableLocal )
+			{
+			    var aReturn = new Array(); 
+			    var aTrs = oTableLocal.fnGetNodes();
+			     
+			    for ( var i=0 ; i<aTrs.length ; i++ )
+			    {
+			        if ( $(aTrs[i]).hasClass('row_selected') )
+			        {
+			            alert ("selected");
+			            aReturn.push( aTrs[i] );
+			        }
+			    }
+			    return aReturn;
+			};
+
+			$(document).ready(function() {
+			    $("#example tbody").click(function(event) {
+			        $(oTable.fnSettings().aoData).each(function (){
+			            $(this.nTr).removeClass('row_selected');
+			        });
+			        $(event.target.parentNode).addClass('row_selected');
+			    });
+
+			    oTable = ('#example').dataTable({
+			        "bJQueryUI" : true,
+			       // "bServerSide":true,
+			       // "bProcessing": true,
+			        "sPaginationType": "full_numbers",
+			        "bFilter": false,
+			        "iSortingCols": 3,
+			       // "sAjaxSource": "<%=request.getContextPath()%>/jsp/dirMan.do?method=processing",
+			        "fnDrawCallback": function() {
+			            $("#example tbody tr td #delete").click(function () {
+			                alert('blah');
+			                var anSelected =  fnGetSelected(oTable);
+			                alert (anSelected);
+			                oTable.fnDeleteRow( anSelected[0]);
+			            });
+			        },
+
+			        "aoColumns": [
+			                      { "mDataProp": "directoryName"},
+			                      { "mDataProp": "path"},
+			                      { "mDataProp": "temp"},
+			                      { "mDataProp": "owner"},
+			                      { "mDataProp": null},
+			                      { "mDataProp": null},
+			                      { "mDataProp": null}
+					          ],
+					          "aoColumnDefs": [
+		                           {
+		                                   "fnRender": function ( oObj ) {
+		                                        
+		                                       if ( oObj.aData["owner"] == "<%=Global.getSuperAdminName()%>") {
+		                                            
+		                                           return "Global";   
+		                                       }
+		                                       else {
+		                                           return "Owned";
+		                                       }
+		                                    
+		                               },
+		                                   "aTargets":[4]
+		                           },
+		                            
+		                           {
+		                               "fnRender": function ( oObj ) {
+		                                    
+		                                   if ( oObj.aData["owner"] == "<%=userName%>") {
+		                                        
+		                                       return "<a  href='<%=request.getContextPath()%>/jsp/dirMan.do?method=edit&id="+oObj.aData["directoryId"]+"'>Edit</a>";   
+		                                   }
+		                                   else {
+		                                       return "N/A";
+		                                   }
+		                                    
+		                               },
+		                               "aTargets": [5]
+		                           },
+		                            
+		                           {
+		                               "fnRender": function ( oObj ) {
+		                                   if ( oObj.aData["owner"] == "<%=userName%>") {
+		                                        
+		                                       return "<a  id='delete' href='#'> Delete</a>"; 
+		                                   }
+		                                   else {
+		                                       return "N/A";
+		                                   }
+		                                    
+		                               },
+		                               "aTargets": [6]
+		                           }
+					               ] 
+			       
+			    });
+			});*/
+
+			<!-- ************************************ -->
+
+			// Global variables
+			var oTable;
+			var giRedraw = false;
+			var giCount = 1;
+			var deploymentsTables;
+			 
+			$(document).ready(function() {
+
+				 deploymentsTables = $('#deploy-registry-table').dataTable({
+					 "sPaginationType": "full_numbers",
+					 // "bFilter": true,
+					 "bJQueryUI": true,
+					 "iDisplayLength": 25,
+					 "sDom": '<"H"lfr>t<"F"ip>T',	// T: the table tools (buttons), H: header, F: footer
+														// t: the data table (!!!) 
+														// l: Length changing (Show...entries), f: filtering input, r: processing, i: information, p: pagination
+						
+					 "oTableTools": {
+							"sSwfPath": "libs/DataTables-1.9.3/extras/TableTools/media/swf/copy_csv_xls_pdf.swf",
+							"aButtons": [
+											"copy", 
+											"print",
+											{
+												"sExtends": "collection",
+												"sButtonText": "Save",
+												"aButtons": [
+																"csv",
+																{
+																	"sExtends": "pdf",
+																	"sTitle": "Log Viewer - Input Streams", // Title of file
+																	"sPdfMessage" : "Summary Info",			// Message inside pdf
+																	"sPdfOrientation": "landscape"
+																}
+												]
+											}  
+							],
+							"sRowSelect": "single"
+						},
+						"bProcessing": true,
+						"bServerSide": true,
+						"sAjaxSource": "http://localhost:9080/FusionCore/ViewApplicationRegistry",
+						"sAjaxDataProp" : "data",
+						"aoColumns": [
+							{ "mData": "deploymentTime" },
+							{ "mData": "id" },
+							{ "mData": "status" },
+							{ "mData": "deployedModuleName" }
+							
+						]
+						// "aaSorting": [[0, "asc"]] // Predefined sorting
+				    });
+
+					// --------- Undeploy Selected Rows -------- //
+				    $("#deploy-registry-table tbody").click(function(event) {
+				        $(deploymentsTables.fnSettings().aoData).each(function (){
+				            $(this.nTr).removeClass('row_selected');
+				        });
+				        $(event.target.parentNode).addClass('row_selected');
+				    });
+
+				    $('#undeploy-button').click( function() {
+						// Get selected
+				        var anSelected = fnGetSelected(deploymentsTables);
+
+						// Get the data of selected row
+						alert("#rows selected: " + anSelected.length);
+				        alert(anSelected[0]);
+
+						var rowData = deploymentsTables.fnGetData( anSelected[0] );
+					    // Undeploy application...
+					    alert('rowData: ' + rowData);
+					    alert('Undeploying application...' + rowData[1]);
+					    
+						// Delete row from table...	   
+				        // deploymentsTables.fnDeleteRow(anSelected[0]);
+
+				        // On success call fnDraw. fnDeleteRow is on client side
+				    });
+
+
+					$('#deploy-registry-table tbody tr').live('click', function () {
+				        // var nTr = $(this).parents('tr')[0];
+				        var nTr = $(this).parentNode;
+				        var suchData = deploymentsTables.fnGetData( nTr );
+				       alert(suchData); 
+				       
+				    });
+				    // ------------------ END ---------------- //
+				    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6
+			 
+			    oTable = $('#example').dataTable({
+			        "bProcessing": false,
+			        //"bServerSide": true,
+			        //"sAjaxSource": "data_json.php",
+			        //"sScrollY": "500px",
+			        //"bPaginate": false,
+			        //"bScrollCollapse": true,
+			        "sPaginationType": "full_numbers",
+			        "aoColumns":[
+			                     null,null,null,
+			                     // 
+			                     { "fnRender": function (oObj) {
+			                          // return '<a href=/cgi/empdetails.php?showemp=' + oObj.aData[0] + '>' + 'More' + '</a>';
+			                    	 // return '<a href=http://www.google.com>' + 'More' + '</a>' + ' for ' + oObj.aData[1] + ' ';
+			                    	 return '<button type="button" id="remove-button">Remove</button>';
+			                        }
+			                     }
+			                 ]
+			        
+			    });
+
+			   // $(window).bind('resize', function () {
+			   //     oTable.fnAdjustColumnSizing();
+			  //  } );
+
+			    $('#add-button').click(fnClickAddRow);
+
+			    $('#iterate-button').click(fnClickIterateRows);
+
+			    // --------- Delete Selected Rows -------- //
+			    $("#example tbody").click(function(event) {
+			        $(oTable.fnSettings().aoData).each(function (){
+			            $(this.nTr).removeClass('row_selected');
+			        });
+			        $(event.target.parentNode).addClass('row_selected');
+			    });
+
+			    $('#delete-button').click( function() {
+					// Get selected
+			        var anSelected = fnGetSelected(oTable);
+
+					// Get the data of selected row
+			        // alert(anSelected[0]);
+				    var aData = oTable.fnGetData( anSelected[0] );
+
+
+				    alert(aData);
+				    // Undeploy application...
+				    alert('Undeploying application...' + aData[1]);
+				    
+					// Delete row from table...	   
+			        oTable.fnDeleteRow(anSelected[0]);
+			    });
+			    // ------------------ END ---------------- //
+
+			   
+				/*
+				// --------- Add Hidden Row Details --------- //
+			    var nCloneTh = document.createElement( 'th' );
+			    var nCloneTd = document.createElement( 'td' ); 
+			    nCloneTd.innerHTML = '<img src="./images/icons/plus_32x32.png">';
+			    nCloneTd.className = "center";
+
+			    $('#example thead tr').each( function () {
+			        this.insertBefore( nCloneTh, this.childNodes[0] );
+			    } );
+			     
+			    $('#example tbody tr').each( function () {
+			        this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+			    } );
+
+			    $('#example tbody td img').live('click', function () {
+			        var nTr = $(this).parents('tr')[0];
+			        if ( oTable.fnIsOpen(nTr) )
+			        {
+			            // This row is already open - close it
+			            this.src = "./images/icons/plus_32x32.png";
+			            oTable.fnClose( nTr );
+			        }
+			        else
+			        {
+			            // Open this row 
+			            this.src = "./images/icons/minus white_32x32.png";
+			            oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+			        }
+			    });
+			    // ------------------ END ---------------- //
+*/
+			    
+			});
+
+			function fnClickIterateRows() {
+
+				
+				var tmpTable = $('#deploy-registry-table').dataTable();
+				var tmpNodes = $('#deploy-registry-table tbody tr')
+
+				for (var i = 0; i < tmpNodes.length; ++i)
+				{
+				    var tmpRowData = tmpTable.fnGetData( tmpNodes[i] )[0];
+				 
+				    //some stuff with the obtained data
+				    alert(tmpRowData);
+				}
+			}
+
+			// Get the selected rows
+			function fnGetSelected( oTableLocal )
+			{
+			    var aReturn = new Array();
+			    var aTrs = oTableLocal.fnGetNodes();
+			      
+			    for ( var i=0 ; i<aTrs.length ; i++ )
+			    {
+			        if ( $(aTrs[i]).hasClass('row_selected') )
+			        {
+			            aReturn.push( aTrs[i] );
+			        }
+			    }
+			 
+			    return aReturn;
+			}
+
+			// Add row 
+			function fnClickAddRow() {
+				$('#example').dataTable().fnAddData([
+					giCount + ".1",
+				    giCount + ".2",
+				    giCount + ".3",
+				    giCount + ".4"
+				]);
+
+				giCount++;
+			}
+
+			// Formating function for row details
+			function fnFormatDetails ( oTable, nTr ) {
+			    var aData = oTable.fnGetData( nTr );
+			    var sOut = '<table cellpadding="4" cellspacing="0" border="0" style="padding-left:50px;">';
+			    sOut += '<tr><td>Application Id:</td><td>' + aData[1] + ' ' + aData[2] + '</td></tr>';
+			    sOut += '<tr><td>View Registry:</td><td>www.google.com</td></tr>';
+			    sOut += '<tr><td>View Context Registry:</td><td>And any further details here (images etc)</td></tr>';
+			    sOut += '</table>';
+			     
+			    return sOut;
+			}
+			
+		</script>
+		<!-- ~~~~~~~~~~~ end javascript ~~~~~~~~~~ -->
+	</head>
+	
+	<body>	
+	    <div id="deploy-registry-main-wrapper">
+	    	<div id="deploy-registry-header">
+	    		<h2>Deployments</h2>
+	    	</div>
+	    	
+	    	<div id="deploy-registry-table-wrapper">
+	        	 
+	        	<table id="deploy-registry-table" class="display">
+	            	 <thead>	
+	                	 <tr>
+	                	 	<th>Timestamp</th>
+	                     	<th>Runtime Name</th>
+	                     	<th>Status</th>
+	                    	<th>Remove</th>
+	                 	</tr>
+	             	</thead>
+	             	<tbody>
+	             	</tbody>
+	         	</table>
+	         	<button type="button" id="undeploy-button">Undeploy</button>
+	         	<button type="button" id="iterate-button">Iterate</button>
+	         	
+	         	 
+	         	<br><br>
+	         	<table id="example" class="display">
+	         		<thead>	
+	                	 <tr>
+	             			<th>Timestamp</th>
+	                     	<th>Runtime Name</th>
+	                     	<th>Status</th>
+	                    	<th>Remove</th>
+	             		</tr>
+	             	</thead>
+	             	<tbody>
+	             		<tr>
+	             			<td>20130215</td>
+	             			<td>Event1</td>
+	             			<td>Deployed</td>
+	             			<td><button type="button" id="remove-button">Remove</button></td>
+	             		</tr>
+	             	</tbody>
+	         	</table>
+	         	
+	         	<button type="button" id="add-button">Add Row</button>
+	         	<button type="button" id="delete-button">Delete Row</button>
+	        </div>
+	      </div>
+	</body>
+</html>

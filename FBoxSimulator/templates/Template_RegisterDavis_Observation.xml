@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RegisterSensor xmlns="http://www.opengis.net/sos/1.0"
+    xmlns:swe="http://www.opengis.net/swe/1.0.1"
+    xmlns:ows="http://www.opengeospatial.net/ows"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:gml="http://www.opengis.net/gml"
+    xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:om="http://www.opengis.net/om/1.0"
+    xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/sos/1.0
+    http://schemas.opengis.net/sos/1.0.0/sosRegisterSensor.xsd
+    http://www.opengis.net/om/1.0
+    http://schemas.opengis.net/om/1.0.0/extensions/observationSpecialization_override.xsd"
+    service="SOS" version="1.0.0">
+
+    <!-- Sensor Description parameter -->
+    <SensorDescription>
+        <sml:SensorML version="1.0.1">
+            <sml:member>
+                <sml:System xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+                    <!-- sml:identification element must contain the ID of the sensor -->
+                    <sml:identification>
+                        <sml:IdentifierList>
+                            <sml:identifier>
+                                <sml:Term definition="urn:ogc:def:identifier:OGC:uniqueID">
+                                    <sml:value>urn:ogc:object:feature:sensor:{OWNER}:{UNIQUE_ID}
+                                    </sml:value>
+                                </sml:Term>
+                            </sml:identifier>
+                        </sml:IdentifierList>
+                    </sml:identification>
+
+                    <!-- sml:capabilities element has to contain status and mobility information -->
+                    <sml:capabilities>
+                        <swe:SimpleDataRecord>
+                            <!--
+                                status indicates, whether sensor is collecting data at the
+                                moment (true) or not (false)
+                            -->
+                            <swe:field name="status">
+                                <swe:Boolean>
+                                    <swe:value>{STATUS}</swe:value>
+                                </swe:Boolean>
+                            </swe:field>
+                            <!--
+                                status indicates, whether sensor is mobile (true) or fixed
+                                (false)
+                            -->
+                            <swe:field name="mobile">
+                                <swe:Boolean>
+                                    <swe:value>false</swe:value>
+                                </swe:Boolean>
+                            </swe:field>
+                        </swe:SimpleDataRecord>
+                    </sml:capabilities>
+
+                    <!-- last measured position of sensor -->
+                    <sml:position name="sensorPosition">
+                        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">
+                            <swe:location>
+                                <swe:Vector gml:id="{OWNER}_{UNIQUE_ID}_location">
+                                    <swe:coordinate name="easting">
+                                        <swe:Quantity>
+                                            <swe:uom code="degree" />
+                                            <swe:value>{LONGITUDE}</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="northing">
+                                        <swe:Quantity>
+                                            <swe:uom code="degree" />
+                                            <swe:value>{LATITUDE}</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="altitude">
+                                        <swe:Quantity>
+                                            <swe:uom code="m" />
+                                            <swe:value>{ALTITUDE}</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                </swe:Vector>
+                            </swe:location>
+                        </swe:Position>
+                    </sml:position>
+
+                    <!-- list containing the output phenomena of this sensor -->
+                    <sml:outputs>
+                        <sml:OutputList>
+                            <sml:output name="temperature">
+                                <swe:Quantity definition="urn:ogc:def:phenomenon:OGC:1.0.30:temperature">
+                                    <gml:metaDataProperty>
+                                            <offering>
+                                                <id>{OFFERING_ID}</id>
+                                                <name>{OFFERING_ID} Measurements</name>
+                                            </offering>
+                                    </gml:metaDataProperty>
+                                    <swe:uom code="celcius"/>
+                                </swe:Quantity>
+                            </sml:output>
+                            <sml:output name="humidity">
+                                <swe:Quantity definition="urn:ogc:def:phenomenon:OGC:1.0.30:humidity">
+                                    <gml:metaDataProperty>
+                                            <offering>
+                                                <id>{OFFERING_ID}</id>
+                                                <name>{OFFERING_ID} Measurements</name>
+                                            </offering>
+                                    </gml:metaDataProperty>                                 
+                                    <swe:uom code="%"/>
+                                </swe:Quantity>
+                            </sml:output>
+                            <sml:output name="windSpeed">
+                                <swe:Quantity definition="urn:ogc:def:phenomenon:OGC:1.0.30:windSpeed">
+                                    <gml:metaDataProperty>
+                                            <offering>
+                                                <id>{OFFERING_ID}</id>
+                                                <name>{OFFERING_ID} Measurements</name>
+                                            </offering>
+                                    </gml:metaDataProperty>                                     
+                                    <swe:uom code="m/s"/> 
+                                </swe:Quantity>
+                            </sml:output>
+                            <sml:output name="windDirection">
+                                <swe:Quantity definition="urn:ogc:def:phenomenon:OGC:1.0.30:windDirection">
+                                    <gml:metaDataProperty>
+                                            <offering>
+                                                <id>{OFFERING_ID}</id>
+                                                <name>{OFFERING_ID} Measurements</name>
+                                            </offering>
+                                    </gml:metaDataProperty>                                     
+                                    <swe:uom code="degree"/> 
+                                </swe:Quantity>
+                            </sml:output>
+							<sml:output name="rainRate">
+                                <swe:Quantity definition="urn:ogc:def:phenomenon:OGC:1.0.30:rainRate">
+                                    <gml:metaDataProperty>
+                                            <offering>
+                                                <id>{OFFERING_ID}</id>
+                                                <name>{OFFERING_ID} Measurements</name>
+                                            </offering>
+                                    </gml:metaDataProperty>                                     
+                                    <swe:uom code="mm/hr"/> 
+                                </swe:Quantity>
+                            </sml:output>
+                        </sml:OutputList>
+                    </sml:outputs>
+                </sml:System>
+            </sml:member>
+        </sml:SensorML>
+    </SensorDescription>
+
+    <!-- ObservationTemplate parameter; this has to be an empty measurement at the moment -->
+    <ObservationTemplate>
+        <om:GeometryObservation>
+            <om:samplingTime/>
+            <om:procedure/>
+            <om:observedProperty/>
+            <om:featureOfInterest/>
+            <om:result uom=""></om:result>
+        </om:GeometryObservation>
+    </ObservationTemplate>
+
+</RegisterSensor>

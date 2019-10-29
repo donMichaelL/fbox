@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Dependencies: com.vividsolutions, org.jboss.as.cli, org.jboss.as.contr
+ oller-client, org.jboss.dmr, org.fbox, com.postgresql
+

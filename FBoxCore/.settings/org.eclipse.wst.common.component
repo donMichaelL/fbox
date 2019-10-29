@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="FBoxCore">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="FusionCore.jar" deploy-path="/" handle="module:/resource/FusionCore/FusionCore">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FusionCoreWeb.war" deploy-path="/" handle="module:/resource/FusionCoreWeb/FusionCoreWeb">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="truevfs-profile-default-0.9.1-shaded.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/truevfs-profile-default-0.9.1-shaded.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-databind-2.0.6.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/jackson-databind-2.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-core-2.0.6.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/jackson-core-2.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-annotations-2.0.6.jar" deploy-path="/lib" handle="module:/classpath/lib/FusionLibraries/lib/jackson-annotations-2.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

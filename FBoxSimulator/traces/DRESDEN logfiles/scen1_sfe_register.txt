@@ -1,0 +1,12 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false 
+#Owner = NKUA
+#Phenomenon = floodEvent
+#Phenomenon_Unit = %
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#SensorFusionEngine 14.05696 50.94873 true
+
+#unique_id timestamp longitude latitude floodEvent

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<link rel="icon" href="images/ico/log_16x16.ico" type="image/x-icon" />
+		<title>Sensor Fusion Engine Expert GUI - Login</title>
+
+		 <!-- ~~~~~~~~~~~ stylesheet(s) ~~~~~~~~~~ -->
+		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/widgets.css"/>
+		<!-- ~~~~~~~~~~~ end stylesheet(s) ~~~~~~~~~~ -->
+		
+   		<!-- ~~~~~~~~~~ script(s) ~~~~~~~~~~ -->		
+    	<!-- libraries -->
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-1.8.2.min.js"></script>
+    	<script type="text/javascript" src="libs/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+        
+        <!-- application script(s) -->
+        <script type="text/javascript">
+    		$(document).ready(function() {
+    			fnInitComponents();
+        	}); 
+
+        	function fnInitComponents () {
+        		$("input[type=submit], button").button();
+          	 }
+
+		</script>
+	</head>
+	
+	<body>
+		<div id="main-wrapper">
+			
+			<div id="header-wrapper">
+				<div id="header-logo">
+					<img alt="logo" src="images/logos/SWeFS_logo.png">
+				</div>
+				
+				<div id="header-title">
+					<h2>Fusion Module - Expert GUI</h2>
+				</div>
+				
+				<div id="header-toolbar">
+				</div>
+			</div>
+			
+			<div id="content-wrapper">
+				<div id="form-wrapper">
+					<form id="signIn-form-div" name="loginForm" method="post" action="j_security_check">
+						<div id="signIn-div">
+							<label class="signIn-label">Sign in</label>
+						</div>
+						
+						<div id="username-div">
+							<label for="input-username" class="username-label">Username</label>
+							<br/>
+							<input type="text" id="input-username" name="j_username" class="username-input"/>
+						</div> 
+						
+						<div id="passwd-div">
+							<label for="input-password" class="passwd-label">Password</label>
+							<br/> 
+							<input type="password" id="input-password" name="j_password" class="passwd-input" />
+						</div>
+						<div id="signIn-controls-div">
+							<input type="submit" id="signIn-button" class="signIn-control-button" value="Sign in"/>
+							<!-- <button id="login-button" class="small-buttons-white">Login</button> -->
+						</div>
+					</form>
+				</div>		
+			</div>
+			
+			<!-- 
+			<div id="footer">
+				<p><strong>Pervasive Computing Research Group</strong></p>
+			</div>  -->  
+		</div>
+		
+	</body>
+</html>

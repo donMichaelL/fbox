@@ -1,0 +1,17 @@
+#METADATA SECTION
+#Type = Measurement
+#Mobile = false 
+#Owner = WAPMERR
+#Phenomenon = position
+#Phenomenon_Unit = degrees
+#Sensor_no = 1
+
+#unique_id longitude latitude status
+#eq-1 13.37306 83.01083 true
+
+#unique_id timestamp longitude latitude position
+eq-1 31850 13.37306 83.01083 16.92851,48.23363
+eq-1 41850 13.37306 83.01083 16.92851,48.23363
+eq-1 51850 13.37306 83.01083 16.92851,48.23363
+eq-1 61850 13.37306 83.01083 16.92851,48.23363
+eq-1 71850 13.37306 83.01083 16.92851,48.23363

@@ -1,0 +1,276 @@
+<fusion-application id="EUAB_EARTHQUAKE" description="EUAB_Earthquake_Scenario">
+	<output>
+		<out id="Out1"> <!-- For the 1st building of the scenario-->
+            <formatter type="capMISO">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Earthquake</iparam>
+                <iparam name="headline">Crowded building in danger</iparam>
+                <iparam name="description">People in danger due to an earthquake event in the wider area of Vienna</iparam>
+                <iparam name="areaDesc">Hospital in Vienna</iparam>
+				<iparam name="applicationID">1a</iparam>
+				<iparam name="category">Safety</iparam>
+            </formatter>
+			
+            <adapter type="capHttp">
+				<iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>              
+			
+			<sources>
+				<src id="UrgencyMapper1"/>
+                <src id="SeverityMapper"/>
+				<src id="T1"/>
+				<src id="ID1"/>
+            </sources>
+        </out>
+		
+		<out id="Out2"> <!-- For the 2nd building of the scenario-->
+            <formatter type="capMISO">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Earthquake</iparam>
+                <iparam name="headline">Crowded building in danger</iparam>
+                <iparam name="description">People in danger due to an earthquake event in the wider area of Vienna</iparam>
+                <iparam name="areaDesc">Hospital in Vienna</iparam>
+				<iparam name="applicationID">1b</iparam>
+				<iparam name="category">Safety</iparam>
+            </formatter>
+			
+            <adapter type="capHttp">
+				<iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>              
+			
+			<sources>
+				<src id="UrgencyMapper2"/>
+                <src id="SeverityMapper"/>
+				<src id="T2"/>
+				<src id="ID2"/>
+            </sources>
+        </out>
+		
+		<out id="Out3"> <!-- For the 3rd building of the scenario-->
+            <formatter type="capMISO">
+                <iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Earthquake</iparam>
+                <iparam name="headline">Crowded building in danger</iparam>
+                <iparam name="description">People in danger due to an earthquake event in the wider area of Vienna</iparam>
+                <iparam name="areaDesc">Hospital in Vienna</iparam>
+				<iparam name="applicationID">1c</iparam>
+				<iparam name="category">Safety</iparam>
+            </formatter>
+			
+            <adapter type="capHttp">
+				<iparam name="wsdl">http://idira-services.frequentis.com:3001/?wsdl</iparam>
+            </adapter>              
+			
+			<sources>
+				<src id="UrgencyMapper3"/>
+                <src id="SeverityMapper"/>
+				<src id="T3"/>
+				<src id="ID3"/>
+            </sources>
+        </out>
+	</output>
+	
+	<streamers>
+		<!-- Locations -->
+		<streamSelector id="building1">
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:building-1</select>
+        </streamSelector>
+		<streamSelector id="building2">
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:building-2</select>
+        </streamSelector>
+		<streamSelector id="building3">
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:building-3</select>
+        </streamSelector>
+		<streamSelector id="eq">
+            <select type="identity">urn:ogc:object:feature:sensor:WAPMERR:eq-1</select>
+        </streamSelector>
+		
+		<!-- Person Count -->
+		<streamSelector id="personCount1">
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:person-count-1</select>
+        </streamSelector>
+		<streamSelector id="personCount2">
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:person-count-2</select>
+        </streamSelector>
+		<streamSelector id="personCount3">
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:person-count-3</select>
+        </streamSelector>
+		
+		<!-- Earthquake's Magnitude -->
+		<streamSelector id="magnitude">
+            <select type="identity">urn:ogc:object:feature:sensor:WAPMERR:earthquake-1</select>
+        </streamSelector>
+	</streamers>
+	
+	<contextors>
+		<!-- Euclidean Distances -->
+		<contextor id="ED1">
+            <algorithm name="EuclideanDistance">
+				<iparam name="unit">km</iparam>
+			</algorithm>
+            <sources>
+                <src selector="building1"/>    
+				<src selector="eq"/>    				
+            </sources>                                                  
+        </contextor>
+		<contextor id="ED2">
+            <algorithm name="EuclideanDistance">
+				<iparam name="unit">km</iparam>
+			</algorithm>
+            <sources>
+                <src selector="building2"/>    
+				<src selector="eq"/>    				
+            </sources>                                                  
+        </contextor>
+		<contextor id="ED3">
+            <algorithm name="EuclideanDistance">
+				<iparam name="unit">km</iparam>
+			</algorithm>
+            <sources>
+                <src selector="building3"/>    
+				<src selector="eq"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Thresholding -->
+		<contextor id="T1">
+			<algorithm name="Threshold">
+                <iparam name="computation-type">hard</iparam>
+				<iparam name="operator">lt</iparam>
+				<iparam name="value">120</iparam>
+			</algorithm>
+			<sources>
+				<src selector="ED1"/>				
+			</sources>							 
+		</contextor>
+		<contextor id="T2">
+			<algorithm name="Threshold">
+                <iparam name="computation-type">hard</iparam>
+				<iparam name="operator">lt</iparam>
+				<iparam name="value">120</iparam>
+			</algorithm>
+			<sources>
+				<src selector="ED2"/>				
+			</sources>							 
+		</contextor>
+		<contextor id="T3">
+			<algorithm name="Threshold">
+                <iparam name="computation-type">hard</iparam>
+				<iparam name="operator">lt</iparam>
+				<iparam name="value">120</iparam>
+			</algorithm>
+			<sources>
+				<src selector="ED3"/>				
+			</sources>							 
+		</contextor>
+		
+		<!-- Zero to One Mapping (for "emergency" field) -->
+		<contextor id="N1">
+            <algorithm name="Normalizer">
+				<iparam name="maxCapacity">1000</iparam>
+            </algorithm>
+            <sources>
+                <src selector="personCount1"/>                                
+            </sources>                                                  
+        </contextor>
+		<contextor id="N2">
+            <algorithm name="Normalizer">
+				<iparam name="maxCapacity">2300</iparam>
+            </algorithm>
+            <sources>
+                <src selector="personCount2"/>                                
+            </sources>                                                  
+        </contextor>
+		<contextor id="N3">
+            <algorithm name="Normalizer">
+				<iparam name="maxCapacity">1500</iparam>
+            </algorithm>
+            <sources>
+                <src selector="personCount3"/>                                
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Zero to One Mapping (for "severity" field) -->
+		<contextor id="Nmagn">
+            <algorithm name="Normalizer">
+				<iparam name="maxCapacity">10</iparam>
+            </algorithm>
+            <sources>
+                <src selector="magnitude"/>                                
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Identity Algos for Building Locations -->
+		<contextor id="ID1">
+            <algorithm name="Identity"/>
+            <sources>
+                <src selector="building1"/>    				
+            </sources>                                                  
+        </contextor>
+		<contextor id="ID2">
+            <algorithm name="Identity"/>
+            <sources>
+                <src selector="building2"/>    				
+            </sources>                                                  
+        </contextor>
+		<contextor id="ID3">
+            <algorithm name="Identity"/>
+            <sources>
+                <src selector="building3"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<!-- Urgency and Severity Value Mappers to Text -->
+		<contextor id="UrgencyMapper1">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.2;0.5;1.0</iparam>
+				<iparam name="mapping-values">Future;Expected;Immediate</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="N1"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<contextor id="UrgencyMapper2">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.2;0.5;1.0</iparam>
+				<iparam name="mapping-values">Future;Expected;Immediate</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="N2"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<contextor id="UrgencyMapper3">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.2;0.5;1.0</iparam>
+				<iparam name="mapping-values">Future;Expected;Immediate</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="N3"/>    				
+            </sources>                                                  
+        </contextor>
+		
+		<contextor id="SeverityMapper">
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam>
+				<iparam name="interval-configuration">0.0;0.39999;0.59999;0.79999;1.0</iparam>
+				<iparam name="mapping-values">Minor;Moderate;Severe;Extreme</iparam>
+				<iparam name="default">no</iparam>
+			</algorithm>
+            <sources>
+                <src selector="Nmagn"/>    				
+            </sources>                                                  
+        </contextor>
+	</contextors>
+	
+</fusion-application>

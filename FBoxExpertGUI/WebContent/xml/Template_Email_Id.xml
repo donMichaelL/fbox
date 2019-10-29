@@ -1,0 +1,76 @@
+<fusion-application id="EMAIL_TEST" description="Email_Scenario_Testing">
+	
+	<!-- Output Section -->
+	<output>
+		<out id="Out1"> <!-- Define an output container for the fusion result -->
+            <formatter type="emailMISO"> <!-- Define the formatter of the container (here an e-mail's body is being created with a Map and a CAP message attached) -->
+				<iparam name="area-location">1</iparam> <!-- Required parameters of this formatter -->
+				<iparam name="sender">SFE</iparam>
+                <iparam name="addresses">NKUA</iparam>
+                <iparam name="event">Fire</iparam>
+                <iparam name="headline">Suburban area in danger due to fire event</iparam>
+                <iparam name="description">Fire event in a suburban area outside Vienna</iparam>
+                <iparam name="areaDesc">Suburban area outside Vienna</iparam>
+                <iparam name="location">16.1532,48.21899 16.11415,48.18833 16.17938,48.16269 16.24323,48.13978 16.25147,48.19291 16.17182,48.20801 16.1532,48.21899</iparam>
+                <iparam name="urgency">Expected</iparam>
+                <iparam name="severity">Severe</iparam>
+				<iparam name="applicationID">1</iparam>
+				<iparam name="category">Met</iparam>
+            </formatter>
+			
+            <adapter type="emailJBoss"> <!-- Define the adapter for the formatted output (Email) -->
+				<iparam name="from">IDIRA</iparam> <!-- Required parameters of the adapter -->
+				<iparam name="to">all@redcross.org</iparam>
+				<iparam name="subject">[IDIRA] Fire Incident in Vienna</iparam>
+            </adapter>             
+			
+			<sources> <!-- Specify the inputs of container's formatter (email's formatter is MISO) -->
+				<src id="CertaintyMapper"/> <!-- The 1st input stream is the Mapped Value of Thresholding algorithm in the "contextors" section -->
+                <src id="Thres"/> <!-- The 2nd input stream is the result of Thresholding algorithm in the "contextors" section -->
+            </sources>
+        </out>
+	</output>
+	
+	<!-- Streamers Section -->
+	<streamers>
+		<streamSelector id="sensor1"> <!-- Select as stream a sensor with the following Unique ID -->
+            <select type="identity">urn:ogc:object:feature:sensor:NKUA:Temp-Sensor-0</select>
+        </streamSelector>
+	</streamers>
+	
+	<!-- Contextors Section -->
+	<contextors>
+		<contextor id="MeanVal"> <!-- Contextor which encapsulates a Buffered (10 slots) Mean algorithm --> 
+            <algorithm name="Mean"> <!-- Calculate mean value from the values of a sensor stream -->
+				<iparam name="buffer">10</iparam> <!-- Algorithm's parameter: Slots of the buffer -->
+			</algorithm>
+            <sources>
+                <src selector="sensor1"/> <!-- Input (SISO algorithm) is sensor stream with id="sensor1" -->    				
+            </sources>                                                  
+        </contextor>
+	
+		<contextor id="Thres"> <!-- Contextor which encapsulates a Thresholding algorithm --> 
+			<algorithm name="Threshold">
+                <iparam name="computation-type">hard</iparam> <!-- Algorithm's parameters -->
+				<iparam name="operator">gt</iparam>
+				<iparam name="value">60</iparam>
+			</algorithm>
+			<sources>
+				<src selector="MeanVal"/> <!-- Input of this algorithm is the output of Buffered Mean algorithm's contextor --> 				
+			</sources>							 
+		</contextor>
+	
+		<contextor id="CertaintyMapper"> <!-- Contextor which encapsulates a ValueMapper algorithm -->
+            <algorithm name="ValueMapper">
+				<iparam name="type">custom</iparam> <!-- Parameters of the algorithm -->
+				<iparam name="interval-configuration">0.5;1.0</iparam>
+				<iparam name="mapping-values">true</iparam>
+				<iparam name="default">false</iparam>
+			</algorithm>
+            <sources>
+                <src selector="Thres"/> <!-- Input of this algorithm is the output of Thresholding algorithm's contextor -->     				
+            </sources>                                                  
+        </contextor>
+	</contextors>
+	
+</fusion-application>
